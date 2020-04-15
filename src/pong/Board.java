@@ -11,7 +11,14 @@ public class Board extends JPanel{
 	private int sizeY;
 	private int sizeX;
 	
-	private Bumper bump1 = new Bumper(5, 5, 20, 10);
+	//temp
+	
+	public Player p;
+	
+	
+	
+	
+	//
 	
 	public Board(int sizeY, int sizeX) {
 		super();
@@ -19,6 +26,12 @@ public class Board extends JPanel{
 		this.sizeX = sizeX;
 		setBackground(Color.LIGHT_GRAY);
 		setPreferredSize(new Dimension(sizeY, sizeX));
+		
+		//temp
+		p = new Player(sizeY/2, 10, sizeY/2+40, 20);
+		addMouseMotionListener(p.mouse);
+		
+		//temp
 	}
 		
 	@Override
@@ -31,7 +44,9 @@ public class Board extends JPanel{
 		for(int i=1; i<=11; i=i+2) {
 			g2d.fillRect(sizeX/2-len/16, i*len , len/8, len);
 		}
-		bump1.draw(g2d);
+		//temp
+		p.draw(g2d);
+		//temp
 	}
 		
 	@Override
@@ -41,7 +56,9 @@ public class Board extends JPanel{
 	
 	
 	public void nextTurn() {
-		bump1.translate(0, 10);
+		//temp
+		p.moveBumper(this.getY());
+		//
 		this.repaint();
 	}
 }

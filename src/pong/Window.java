@@ -1,7 +1,6 @@
 package pong;
 
 import javax.swing.*;
-import java.awt.AWTEvent; // zamiast event
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,7 +23,7 @@ public class Window {
 		frame.pack();
 
 		
-		Timer timer = new Timer(200, new ActionListener() {
+		Timer timer = new Timer(10, new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				board.nextTurn();
 			}

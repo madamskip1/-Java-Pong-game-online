@@ -1,6 +1,5 @@
 package pong;
 
-
 public class Point {
 	private int x;
 	private int y;
@@ -8,6 +7,11 @@ public class Point {
 	public Point(int x, int y) {
 		this.x = x;
 		this.y = y;
+	}
+	
+	public Point(java.awt.Point p) {
+		this.x = (int)p.getX();
+		this.y = (int)p.getY();
 	}
 	
 	public int getX() {
@@ -23,3 +27,4 @@ public class Point {
 		y = this.y + dy;
 	}
 }
+	
