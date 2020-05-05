@@ -4,41 +4,55 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 public class Bumper {
-	private Point topL;
-	private Point botR;
+	public static final int DEFAULT_WIDTH = 10;
+	public static final int DEFAULT_HEIGHT = 40;
+	public static final Color BUMPER_COLOR = Color.yellow;
+	
+	private Point Position;
+	private int width;
+	private int height;
 
-	public Bumper(int yTop, int xTop, int yBot, int xBot) {
-		topL = new Point(xTop, yTop);
-		botR = new Point(xBot, yBot);
+	public Bumper(int x, int y) {
+		Position = new Point (x, y);
+		width = DEFAULT_WIDTH;
+		height = DEFAULT_HEIGHT;
 	}
+	
 
 	public void translate(int dx, int dy) {
-		topL.translate(dx, dy);
-		botR.translate(dx, dy);
+		Position.translate(dx, dy);
 	}
 
+	public void setHeight(int _height) {
+		height = _height;
+	}
+	
 	public int getHeight() {
-		return (botR.getY() - topL.getY());
+		return height;
+	}
+	
+	public void setWidth(int _width)
+	{
+		width = _width;
 	}
 
 	public int getWidth() {
-		return (botR.getX() - topL.getX());
+		return width;
 	}
 
 	public Point getCentre() {
-		return (new Point((topL.getX() + botR.getX()) / 2, (topL.getY() + botR.getY()) / 2));
+		return new Point(Position.getX() + (width / 2), Position.getY() + (height / 2));
+	}
+	
+	public Point getPosition()
+	{
+		return Position;
 	}
 
 	public void draw(Graphics2D g2d) {
-		g2d.setColor(Color.yellow);
-		g2d.fillRect(topL.getX(), topL.getY(), getWidth(), getHeight());
+		g2d.setColor(BUMPER_COLOR);
+		g2d.fillRect(Position.getX(), Position.getY(), width, height);
 	}
 	
-	public int getTop() {
-		return topL.getY();
-	}
 	
-	public int getBot() {
-		return botR.getY();
-	}
 }

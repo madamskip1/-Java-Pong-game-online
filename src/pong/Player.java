@@ -7,8 +7,8 @@ public class Player {
 	public Bumper bumper;
 	public Mouse mouse;
 	
-	public Player(int bY1, int bX1, int bY2, int bX2) {
-		bumper = new Bumper(bY1, bX1, bY2, bX2);
+	public Player(int x, int y) {
+		bumper = new Bumper(x, y);
 		mouse = new Mouse();
 	}
 	
@@ -18,7 +18,7 @@ public class Player {
 		int mY = mouse.loc.getY();
 		int cY = bumper.getCentre().getY();
 		
-		if(bumper.getTop()>0 || bumper.getBot()<fieldY) {
+		if(bumper.getPosition().getY() > 0 || (bumper.getPosition().getY() + bumper.getHeight()) < fieldY) {
 			bumper.translate(0, (mY-cY)/15);			
 		}
 	}

@@ -8,6 +8,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 public class Board extends JPanel{
+	public static final Color BACKGROUND_COLOR = Color.LIGHT_GRAY;
+	public static final int X_PADDING = 10;
 	private int sizeY;
 	private int sizeX;
 	
@@ -24,11 +26,11 @@ public class Board extends JPanel{
 		super();
 		this.sizeY = sizeY;
 		this.sizeX = sizeX;
-		setBackground(Color.LIGHT_GRAY);
+		setBackground(BACKGROUND_COLOR);
 		setPreferredSize(new Dimension(sizeY, sizeX));
 		
 		//temp
-		p = new Player(sizeY/2, 10, sizeY/2+40, 20);
+		p = new Player(X_PADDING, sizeY/2);
 		addMouseMotionListener(p.mouse);
 		
 		//temp
