@@ -7,9 +7,16 @@ public class Player {
 	public Bumper bumper;
 	public Mouse mouse;
 	
-	public Player(int x, int y) {
+	public Player(int x, int y)  {
 		bumper = new Bumper(x, y);
 		mouse = new Mouse();
+		
+		Point p1 = new Point(2, 2);
+		Point p2 = new Point(p1);
+		p2.x = 5;
+		System.out.println(p1.x);
+		System.out.println(p2.x);
+		
 	}
 	
 	

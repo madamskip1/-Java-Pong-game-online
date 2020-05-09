@@ -1,8 +1,18 @@
 package pong;
 
 public class Point {
-	private int x;
-	private int y;
+	protected int x;
+	protected int y;
+	
+	public Point()
+	{
+		this.zero();
+	}
+	
+	public Point(Point p)
+	{
+		this.x = p.x;
+	}
 	
 	public Point(int x, int y) {
 		this.x = x;
@@ -14,6 +24,13 @@ public class Point {
 		this.y = (int)p.getY();
 	}
 	
+	public void zero()
+	{
+		this.x = 0;
+		this.y = 0;
+	}
+	
+	
 	public int getX() {
 		return x;
 	}
@@ -23,8 +40,26 @@ public class Point {
 	}
 	
 	public void translate(int dx, int dy) {
-		x = this.x + dx;
-		y = this.y + dy;
+		this.x += dx;
+		this.y += dy;
+	}
+	
+	public void add(Point p)
+	{
+		this.x += p.x;
+		this.y += p.y;
+	}
+	
+	public double distance(int x, int y)
+	{
+		int dx = this.x - x;
+		int dy = this.y - y;
+		return Math.sqrt(dx * dx + dy * dy);
+	}
+	
+	public double distance(Point p)
+	{
+		return distance(p.x, p.y);
 	}
 }
 	

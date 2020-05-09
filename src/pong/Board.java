@@ -46,6 +46,7 @@ public class Board extends JPanel{
 		for(int i=1; i<=11; i=i+2) {
 			g2d.fillRect(sizeX/2-len/16, i*len , len/8, len);
 		}
+		
 		//temp
 		p.draw(g2d);
 		//temp
