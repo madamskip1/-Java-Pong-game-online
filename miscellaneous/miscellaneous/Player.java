@@ -1,4 +1,4 @@
-package miscellaneous;
+package server;
 
 public class Player {
 	public static final double DEFAULT_SPEED = 2.0;

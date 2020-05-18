@@ -1,4 +1,4 @@
-package server;
+package pong;
 
 public class Point {
 	protected int x;
@@ -39,7 +39,7 @@ public class Point {
 		return y;
 	}
 	
-	public void add(int dx, int dy) {
+	public void translate(int dx, int dy) {
 		this.x += dx;
 		this.y += dy;
 	}

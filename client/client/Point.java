@@ -1,4 +1,4 @@
-package server;
+package client;
 
 public class Point {
 	protected int x;
@@ -60,6 +60,12 @@ public class Point {
 	public double distance(Point p)
 	{
 		return distance(p.x, p.y);
+	}
+	
+	public void set(int _x, int _y)
+	{
+		x = _x;
+		y = _y;
 	}
 }
 	

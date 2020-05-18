@@ -1,8 +1,6 @@
-package server;
+package pong;
 
-import java.util.Random;
-
-public class Utility {
+public class Physic {
 	public static boolean AABB (Point p1, int width1, int height1, Point p2, int width2, int height2)
 	{
 		if (p1.x < p2.x + width2 &&
@@ -53,31 +51,6 @@ public class Utility {
 		if (dist <= radius)
 			return true;
 		
-		return false;
-	}
-	
-	public static int randomInt(int min, int max)
-	{
-		int minus = 0;
-		if (min <= 0)
-		{
-			minus = 1 - min;
-			min += minus;
-			max += minus;
-		}
-
-		Random rand = new Random();
-		return rand.nextInt((max - min) + 1) + min - minus;
-	}
-	
-	public static double randomDouble(double min, double max)
-	{
-		Random rand = new Random();
-		return rand.nextDouble() * (max - min) + min;
-	}
-	
-	public static double randomDouble(int min, int max)
-	{
-		return randomDouble((double)min, (double)max);
+		return false;a
 	}
 }

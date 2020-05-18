@@ -1,8 +1,6 @@
-package miscellaneous;
+package server;
 
 import java.util.Random;
-
-import server.Utility;
 
 public class Ball {
 	public static final int DEFAULT_RADIUS = 2;
@@ -66,8 +64,6 @@ public class Ball {
 	
 	public Point getPosition() { return position; }
 	
-	public int getRadius() { return radius; }
-	
 	
 	public void setVelocity(int x, int y)
 	{
@@ -84,7 +80,7 @@ public class Ball {
 	{
 		position.add((int)(velocity.x * deltaTime), (int)(velocity.y * deltaTime));
 		
-		if (position.x < 0 || position.x > BoardConst.WIDTH)
+		if (position.x < 0 || position.x > Board.WIDTH)
 			return false;
 		
 		if ((position.y + radius) < 0)
@@ -92,9 +88,9 @@ public class Ball {
 			position.y = -(position.y + radius);
 			velocity.negateY();
 		}
-		else if ((position.y + radius) > BoardConst.HEIGHT)
+		else if ((position.y + radius) > Board.HEIGHT)
 		{
-			position.y = BoardConst.HEIGHT -(BoardConst.HEIGHT - position.y + radius);
+			position.y = Board.HEIGHT -(Board.HEIGHT - position.y + radius);
 			velocity.negateY();
 		}
 			

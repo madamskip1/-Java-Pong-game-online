@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import miscellaneous.Player;
-
 public class ServerProtocol {
 	private final Pattern mainPattern;
 	private Player player;
