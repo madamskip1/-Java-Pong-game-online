@@ -1,12 +1,7 @@
-package server;
+package pong;
 
 public class Vector2d extends Point 
 {
-	public Vector2d(int _vx, int _vy) {
-		x = _vx;
-		y = _vy;
-	}
-
 	public void negate()
 	{
 		this.x *= -1;

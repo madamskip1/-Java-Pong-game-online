@@ -1,7 +1,6 @@
 package client;
 
 import java.awt.Graphics2D;
-import miscellaneous.*;
 
 public class Player {
 	public enum Direction
@@ -14,7 +13,7 @@ public class Player {
 	}
 	
 	private Direction direction;
-	public Bumper bumper;
+	private Bumper bumper;
 	
 	public Player()  {
 		stop();
