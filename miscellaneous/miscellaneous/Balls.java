@@ -1,4 +1,4 @@
-package server;
+package miscellaneous;
 
 import java.util.Vector;
 

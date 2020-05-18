@@ -1,5 +1,10 @@
 package server;
 
+import miscellaneous.Ball;
+import miscellaneous.Balls;
+import miscellaneous.Bumper;
+import miscellaneous.Player;
+
 public class Game
 {
 	public enum States
@@ -39,20 +44,20 @@ public class Game
 		playersBumpers[0] = new Bumper();
 		playersBumpers[1] = new Bumper();
 		
-		int yPosition = (server.Board.WIDTH/2) - (Bumper.DEFAULT_HEIGHT/2);
-		players[0] = new Player(server.Board.X_PADDING, yPosition, playersBumpers[0]);
-		Protocol.writePlayerProtocol(0, "MOVE", server.Board.X_PADDING + "," + yPosition);
+		int yPosition = (miscellaneous.BoardConst.WIDTH/2) - (Bumper.DEFAULT_HEIGHT/2);
+		players[0] = new Player(miscellaneous.BoardConst.X_PADDING, yPosition, playersBumpers[0]);
+		Protocol.writePlayerProtocol(0, "MOVE", miscellaneous.BoardConst.X_PADDING + "," + yPosition);
 		Protocol.writePlayerProtocol(0, "SIZE", Bumper.DEFAULT_WIDTH + "," + Bumper.DEFAULT_HEIGHT);
 		
-		players[1] = new Player(server.Board.WIDTH - server.Board.X_PADDING - Bumper.DEFAULT_WIDTH, yPosition, playersBumpers[1]);
-		Protocol.writePlayerProtocol(1, "MOVE", (server.Board.WIDTH - server.Board.X_PADDING) + "," + yPosition);
+		players[1] = new Player(miscellaneous.BoardConst.WIDTH - miscellaneous.BoardConst.X_PADDING - Bumper.DEFAULT_WIDTH, yPosition, playersBumpers[1]);
+		Protocol.writePlayerProtocol(1, "MOVE", (miscellaneous.BoardConst.WIDTH - miscellaneous.BoardConst.X_PADDING) + "," + yPosition);
 		Protocol.writePlayerProtocol(1, "SIZE", Bumper.DEFAULT_WIDTH + "," + Bumper.DEFAULT_HEIGHT);
 	}
 	
 	public void setupFirstBall()
 	{
 		Balls = new Balls();
-		Balls.addBall(Ball.generateBall(server.Board.WIDTH, server.Board.HEIGHT));
+		Balls.addBall(Ball.generateBall(miscellaneous.BoardConst.WIDTH, miscellaneous.BoardConst.HEIGHT));
 		Protocol.writeBallProtocol(("POSITION;" + Balls.size()), Balls.serialize());
 	}
 	

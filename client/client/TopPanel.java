@@ -1,4 +1,4 @@
-package pong;
+package client;
 
 import javax.swing.JPanel;
 

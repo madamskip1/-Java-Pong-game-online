@@ -1,4 +1,4 @@
-package server;
+package miscellaneous;
 
 public class Vector2d extends Point 
 {

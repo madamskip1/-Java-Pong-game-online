@@ -1,4 +1,4 @@
-package server;
+package miscellaneous;
 
 public class Bumper {
 	public static final int DEFAULT_WIDTH = 10;
@@ -18,6 +18,10 @@ public class Bumper {
 		Position.add(0, dy);
 	}
 
+	public void setPosition(int x,int y) {
+		Position.set(x, y);
+	}
+	
 	public void setHeight(int _height) {
 		height = _height;
 	}

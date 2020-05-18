@@ -1,19 +1,24 @@
-package pong;
+package client;
 
 import javax.swing.*;
+
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Window {
-
-	public static void createAndShowGUI() {
+	public static final int boardXSize = 1000;
+	public static final int boardYSize = 440;
+	public static final int topPanelYSize = 60; //xsize == boardXsize
+	public static final int repaintTime = 8;
+	
+	public void createAndShowGUI() {
 		JFrame frame = new JFrame("Pong");
 		frame.setResizable(false);
 		frame.setVisible(true);
 
-		TopPanel tPanel = new TopPanel(60, 1000);
-		Board board = new Board(440, 1000);
+		TopPanel tPanel = new TopPanel(topPanelYSize, boardXSize);
+		Board board = new Board(boardYSize, boardXSize);
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -23,7 +28,7 @@ public class Window {
 		frame.pack();
 
 		
-		Timer timer = new Timer(10, new ActionListener() {
+		Timer timer = new Timer(repaintTime, new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				board.nextTurn();
 			}
@@ -34,11 +39,5 @@ public class Window {
 	}
 
 
-	public static void main(String[] args) {
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				createAndShowGUI();
-			}
-		});
-	}
+	
 }
