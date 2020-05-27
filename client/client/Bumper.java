@@ -1,26 +1,21 @@
-package pong;
+package client;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 
 public class Bumper {
-	public static final int DEFAULT_WIDTH = 10;
-	public static final int DEFAULT_HEIGHT = 40;
-	public static final Color BUMPER_COLOR = Color.yellow;
+	public static final Color [] BUMPER_COLORS = {Color.green, Color.blue};
 	
 	private Point Position;
 	private int width;
 	private int height;
 
-	public Bumper(int x, int y) {
-		Position = new Point (x, y);
-		width = DEFAULT_WIDTH;
-		height = DEFAULT_HEIGHT;
+	public Bumper() {
 	}
 	
 
-	public void translate(int dx, int dy) {
-		Position.translate(dx, dy);
+	public void setPosition(int x, int y) {
+		Position.set(x, y);
 	}
 
 	public void setHeight(int _height) {
@@ -49,8 +44,8 @@ public class Bumper {
 		return Position;
 	}
 
-	public void draw(Graphics2D g2d) {
-		g2d.setColor(BUMPER_COLOR);
+	public void draw(Graphics2D g2d, int player) {
+		g2d.setColor(BUMPER_COLORS[player]);
 		g2d.fillRect(Position.getX(), Position.getY(), width, height);
 	}
 	
