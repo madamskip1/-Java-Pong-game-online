@@ -32,4 +32,9 @@ public class Vector2d extends Point
 	{
 		return (int)length();
 	}
+	
+	public void accelerate(int _d2x, int _d2y) {
+		x += _d2x;
+		y += _d2y;
+	}
 }

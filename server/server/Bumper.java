@@ -7,6 +7,7 @@ public class Bumper {
 	private Point Position;
 	private int width;
 	private int height;
+	private double lastSpeed;
 
 	public Bumper() {
 		width = DEFAULT_WIDTH;
@@ -42,5 +43,13 @@ public class Bumper {
 	public Point getPosition()
 	{
 		return Position;
+	}
+	
+	public void setLastSpeed(double _lastSpeed) {
+		lastSpeed = _lastSpeed;
+	}
+	
+	public double getLastSpeed() {
+		return lastSpeed;
 	}
 }

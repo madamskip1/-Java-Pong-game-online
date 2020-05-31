@@ -1,11 +1,8 @@
 package client;
 
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
-
-import javax.swing.ImageIcon;
 
 
 

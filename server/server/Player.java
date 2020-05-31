@@ -48,9 +48,11 @@ public class Player {
 	
 	public void update(double deltaTime)
 	{
-		if (direction == Direction.NONE)
+		if (direction == Direction.NONE) {
+			bumper.move(0);
 			return;
-		
+		}
+			
 		int dy = (int)Math.round(deltaTime * speed);
 		
 		if (direction == Direction.UP)
