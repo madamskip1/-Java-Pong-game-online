@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 public class Bumper {
+	public static int HEIGHT = 200;
+	public static int WIDTH = 10;
 	public static final Color [] BUMPER_COLORS = {Color.green, Color.blue};
 	
 	private Point Position;
@@ -11,6 +13,9 @@ public class Bumper {
 	private int height;
 
 	public Bumper() {
+		Position = new Point();
+		width = WIDTH;
+		height = HEIGHT;
 	}
 	
 

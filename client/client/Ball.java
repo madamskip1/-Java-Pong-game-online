@@ -24,9 +24,9 @@ public class Ball {
 	
 	public void drawBall(Graphics2D g) {
 		g.setColor(BALL_COLOR);
-		g.fillOval(position.x, position.y, radius, radius);
+		g.fillOval(position.x - radius, position.y - radius, radius * 2, radius * 2);
 		g.setColor(EDGE_COLOR);
-		g.drawOval(position.x, position.y, radius, radius);	
+		g.drawOval(position.x - radius, position.y - radius, radius * 2, radius * 2);	
 	}
 	
 }

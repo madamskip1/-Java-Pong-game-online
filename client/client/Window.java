@@ -6,11 +6,30 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Window {
+public class Window extends JFrame {
 	public static final int WIDTH = 1000;
 	public static final int HEIGHT = 440;
 	public static final int PANEL_HEIGHT = 60;
 	public static final int REFRESH_T = 8;
+	private Board board;
+	private TopPanel topPanel;
+	
+	
+	public Window(Keyboard keyB)
+	{
+		addKeyListener(keyB);
+		setFocusable(true);
+	}
+	
+	public void setBoard(Board _board)
+	{
+		board = _board;
+	}
+	
+	public void setTopPanel(TopPanel _panel)
+	{
+		topPanel = _panel;
+	}
 	
 	
 	public void createAndShowGUI() {
@@ -18,23 +37,12 @@ public class Window {
 		frame.setResizable(false);
 		frame.setVisible(true);
 
-		TopPanel tPanel = new TopPanel(WIDTH, PANEL_HEIGHT);
-		Board board = new Board(WIDTH, HEIGHT);
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		frame.add(tPanel, BorderLayout.NORTH);
+		frame.add(topPanel, BorderLayout.NORTH);
 		frame.add(board, BorderLayout.CENTER);
 
 		frame.pack();
-
-		Timer timer = new Timer(REFRESH_T, new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				board.nextTurn();
-			}
-
-		});
-		
-	timer.start();
 	}
 }

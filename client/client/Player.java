@@ -33,4 +33,9 @@ public class Player {
 		bumper.setWidth(width);
 		bumper.setHeight(height);
 	}
+	
+	public Bumper getBumper()
+	{
+		return bumper;
+	}
 }

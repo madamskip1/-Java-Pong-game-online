@@ -9,9 +9,8 @@ import java.awt.Graphics2D;
 
 public class TopPanel extends JPanel {
 	public static final Color PANEL_COLOR = Color.black;
-
-	private int sizeY;
-	private int sizeX;
+	public static final int HEIGHT = 60;
+	public static final int WIDTH = 1000;
 
 	private int p1ScoreX;
 	private int p1ScoreY;
@@ -21,20 +20,23 @@ public class TopPanel extends JPanel {
 	private Score s1;
 	private Score s2;
 
-	public TopPanel(int sizeX, int sizeY) {
+	public TopPanel(Score score1, Score score2, Keyboard keyB) {
 		super();
-		this.sizeX = sizeX;
-		this.sizeY = sizeY;
-		this.p1ScoreX = sizeX / 4;
-		this.p1ScoreY = sizeY / 2 +2;
-		this.p2ScoreX = sizeX * 3 / 4;
-		this.p2ScoreY = sizeY / 2 +2;
+		this.p1ScoreX = WIDTH / 4;
+		this.p1ScoreY = HEIGHT / 2 +2;
+		this.p2ScoreX = WIDTH * 3 / 4;
+		this.p2ScoreY = HEIGHT / 2 +2;
 		setBackground(PANEL_COLOR);
 		setPreferredSize(getPreferredSize());
 
-		s1 = new Score(p1ScoreX, p1ScoreY, "name");
-		s2 = new Score(p2ScoreX, p2ScoreY, "name1");
-
+		s1 = score1;
+		s2 = score2;
+		
+		s1.setPosition(p1ScoreX, p1ScoreY);
+		s2.setPosition(p2ScoreX, p2ScoreY);
+		
+		addKeyListener(keyB);
+		setFocusable(true);
 	}
 
 	@Override
@@ -49,6 +51,6 @@ public class TopPanel extends JPanel {
 
 	@Override
 	public Dimension getPreferredSize() {
-		return (new Dimension(sizeX, sizeY));
+		return (new Dimension(WIDTH, HEIGHT));
 	}
 }

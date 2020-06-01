@@ -16,14 +16,18 @@ public class Score {
 	private String name;
 	
 	
-	public Score(int x, int y, String name) {
+	public Score(String name) {
 		score = 0;
-		p = new Point(x,y);
 		this.name = name;
 	}
 	
 	public void setScore(int x) {
 		score = x;
+	}
+	
+	public void setPosition(int x, int y)
+	{
+		p = new Point(x,y);
 	}
 	
 	public void drawScore(Graphics2D g2d) {
