@@ -28,22 +28,20 @@ public class Utility {
 	
 	public static boolean CircleRectangleCollision(Point circle, int radius, Point rect, int width, int height)
 	{
-		int tempX;
-		int tempY;
+		int tempX=0;
+		int tempY=0;
 		
-		if (circle.x < rect.x)
+		if (circle.x <= rect.x)
 			tempX = rect.x;
 		else if (circle.x > (rect.x + width))
-			tempX = rect.x  = width;
-		else
-			tempX = circle.x;
+			tempX = rect.x  + width;
+
 		
-		if (circle.y < rect.y)
+		if (circle.y <= rect.y)
 			tempY = rect.y;
-		else if (circle.y < rect.y)
+		else if (circle.y > rect.y)
 			tempY = rect.y + height;
-		else 
-			tempY = circle.y;
+
 		
 		tempX = circle.x - tempX;
 		tempY = circle.y - tempY;
@@ -52,7 +50,6 @@ public class Utility {
 		
 		if (dist <= radius)
 			return true;
-		
 		return false;
 	}
 	

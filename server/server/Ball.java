@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Ball {
 	public static final int DEFAULT_RADIUS = 15;
-	public static final double FRICTION = 0.05;
+	public static final double FRICTION = 5;
 	private Point position;
 	private Vector2d velocity;
 	private int radius;
@@ -44,8 +44,11 @@ public class Ball {
 		if (Utility.randomInt(0, 100) <= 50)
 			y *= -1;
 
+		x=2;
+		y=-2;////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		
 		_ball.setVelocity(x, y);
-
 
 		return _ball;
 	}
@@ -62,9 +65,8 @@ public class Ball {
 	public Point getPosition() {
 		return position;
 	}
-	
-	public int getRadius()
-	{
+
+	public int getRadius() {
 		return radius;
 	}
 
@@ -79,14 +81,14 @@ public class Ball {
 
 	public boolean update() {
 		position.add(velocity.x, velocity.y);
-		
-		if (position.x < 0 || position.x > Board.WIDTH)  // Wysz³a z boku
+
+		if (position.x < 0 || position.x > Board.WIDTH) // Wysz³a z boku
 			return false;
 
-		if ((position.y - radius) < 0) {		// Odbicie od góry
+		if ((position.y - radius) < 0) { // Odbicie od góry
 			position.y = radius - (position.y - radius);
 			velocity.negateY();
-		} else if ((position.y + radius) > Board.HEIGHT) {		// Odbicie od do³u
+		} else if ((position.y + radius) > Board.HEIGHT) { // Odbicie od do³u
 			position.y = Board.HEIGHT - radius - (position.y + radius - Board.HEIGHT);
 			velocity.negateY();
 		}
@@ -95,18 +97,17 @@ public class Ball {
 	}
 
 	public boolean bumperCollision(Bumper b1, Bumper b2) {
-		
-		// Do poprawienia
-		
+
 		if (velocity.x > 0) {
-			if (position.x + radius >= b2.getPosition().x) {
+			if (Utility.CircleRectangleCollision(position, radius, b2.getPosition(), b2.getHeight(), b2.getWidth())) {
 				velocity.negateX();
 				spin(b1);
 				touchByPlayer = 0;
 				return true;
 			}
+
 		} else {
-			if (position.x - radius <= b1.getPosition().x + b1.getWidth()) {
+			if (Utility.CircleRectangleCollision(position, radius, b1.getPosition(), b1.getHeight(), b1.getWidth())) {
 				velocity.negateX();
 				spin(b2);
 				touchByPlayer = 1;
@@ -116,18 +117,21 @@ public class Ball {
 		return false;
 	}
 
-	boolean powerupCollisionCheck(Powerup pp)
-	{
+	public boolean powerupCollisionCheck(Powerup pp) {
 
 		// Tutaj do tego te¿ masz gotow¹ funkcje w Server.Utility
-		
+
 		int testX = 0;
 		int testY = 0;
 
-		if (position.x < pp.getPosition().x) 	testX = pp.getPosition().x; // left edge
-		else if (position.x > pp.getPosition().x) 	testX = pp.getPosition().x + pp.getSize(); // right edge
-		if (position.y < pp.getPosition().y) 	testY = pp.getPosition().y; // top edge
-		else if (position.y > pp.getPosition().y)	 testY = pp.getPosition().y + pp.getSize(); // bottom edge
+		if (position.x < pp.getPosition().x)
+			testX = pp.getPosition().x; // left edge
+		else if (position.x > pp.getPosition().x)
+			testX = pp.getPosition().x + pp.getSize(); // right edge
+		if (position.y < pp.getPosition().y)
+			testY = pp.getPosition().y; // top edge
+		else if (position.y > pp.getPosition().y)
+			testY = pp.getPosition().y + pp.getSize(); // bottom edge
 
 		int distX = position.x - testX;
 		int distY = position.y - testY;
@@ -136,6 +140,17 @@ public class Ball {
 		if (distance <= radius)
 			return true;
 
+		return false;
+	}
+
+	public boolean addToScore(int score[]) {
+		if (position.x < 0) {
+			++score[0];
+			return true;
+		} else if (position.x > Board.WIDTH) {
+			++score[1];
+			return true;
+		}
 		return false;
 	}
 

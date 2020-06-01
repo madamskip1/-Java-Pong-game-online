@@ -19,7 +19,7 @@ public class Game
 	private Balls Balls;
 	private States State;
 	private int FPS = 60;
-		
+	private int[] Score = {0,0};
 		
 	public Game(ServerProtocol _prot)
 	{
@@ -100,6 +100,7 @@ public class Game
 		
 		// Check collision
 		// Check gameEnd
+		Balls.updateScore(Score);
 	}
 	
 	private void sendEverything()

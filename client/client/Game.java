@@ -186,4 +186,8 @@ public class Game {
 			break;
 		}
 	}
+	
+	public void zeroBalls() {
+		Balls.clearBalls();
+	}
 }

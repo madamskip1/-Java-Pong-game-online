@@ -10,60 +10,50 @@ public class ClientProtocol {
 	private final Pattern twoPattern;
 	private Game game;
 	private DataOutputStream Output;
-	
-	public ClientProtocol(Game _game, DataOutputStream _output)
-	{
+
+	public ClientProtocol(Game _game, DataOutputStream _output) {
 		game = _game;
 		Output = _output;
 		mainPattern = Pattern.compile("(.+?);(.+?);(.+?)");
 		twoPattern = Pattern.compile("(.+?);(.+?)");
 	}
-	
-	public void read(String msg)
-	{
-		Matcher match = mainPattern.matcher(msg);
-		match.matches();
-		String obj = match.group(1);
-		String settings = match.group(2);
-		String mainMsg = match.group(3);
 
-		
-		if (obj.equals("PLAYER"))
-			readPlayerProtocol(settings, mainMsg);
-			
-		else if (obj.equals("BALL"))
-			readBallProtocol(settings, mainMsg);
-		
-		else if (obj.equals("STATE"))
-			readStateProtocol(settings, mainMsg);
-		
-		
+	public void read(String msg) {
+		Matcher match = mainPattern.matcher(msg);
+		if (match.matches()) {
+			String obj = match.group(1);
+			String settings = match.group(2);
+			String mainMsg = match.group(3);
+
+			if (obj.equals("PLAYER"))
+				readPlayerProtocol(settings, mainMsg);
+
+			else if (obj.equals("BALL"))
+				readBallProtocol(settings, mainMsg);
+
+			else if (obj.equals("STATE"))
+				readStateProtocol(settings, mainMsg);
+
+		}
 	}
-	
-	private void write(String msg) throws IOException
-	{
+
+	private void write(String msg) throws IOException {
 		Output.writeUTF(msg);
 	}
-	
-	private void readPlayerProtocol(String settings, String mainMsg)
-	{
-		if (settings.equals("YOU"))
-		{
+
+	private void readPlayerProtocol(String settings, String mainMsg) {
+		if (settings.equals("YOU")) {
 			game.setYou(Integer.parseInt(mainMsg));
 			game.init();
-		}
-		else if (settings.equals("OPPONENT"))
+		} else if (settings.equals("OPPONENT"))
 			game.initialized();
-		else if (settings.contains("MOVE"))
-		{
+		else if (settings.contains("MOVE")) {
 			String[] pos = mainMsg.split(",");
 			int player = getPlayerId(settings);
 			int x = Integer.parseInt(pos[0]);
 			int y = Integer.parseInt(pos[1]);
 			game.PlayerPos(player, x, y);
-		}
-		else if (settings.contains("SIZE"))
-		{
+		} else if (settings.contains("SIZE")) {
 			String[] size = mainMsg.split(",");
 			int player = getPlayerId(settings);
 			int width = Integer.parseInt(size[0]);
@@ -71,44 +61,35 @@ public class ClientProtocol {
 			game.PlayerSize(player, width, height);
 		}
 	}
-	
-	private void readBallProtocol(String settings, String mainMsg)
-	{
+
+	private void readBallProtocol(String settings, String mainMsg) {
 		System.out.println(mainMsg);
-		if (settings.equals("POSITION"))
-		{
+		if (settings.equals("POSITION")) {
 			Matcher match = twoPattern.matcher(mainMsg);
-			match.matches();
-			game.Balls(Integer.parseInt(match.group(1)), match.group(2));
+			if (match.matches())
+				game.Balls(Integer.parseInt(match.group(1)), match.group(2));
+			else
+				game.zeroBalls(); // inaczej nie znikna
 		}
 	}
-	
-	private void readStateProtocol(String settings, String mainMsg)
-	{
-		if (settings.equals("INIT"))
-		{
-			
-				
-		}
-		else if (settings.equals("START"))
+
+	private void readStateProtocol(String settings, String mainMsg) {
+		if (settings.equals("INIT")) {
+
+		} else if (settings.equals("START"))
 			game.start();
-		
+
 	}
-	
-	
-	public void writePlayerProtocol(String settings, String mainMsg)
-	{
+
+	public void writePlayerProtocol(String settings, String mainMsg) {
 		try {
 			write("PLAYER;" + settings + ";" + mainMsg);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
-	private int getPlayerId(String msg)
-	{
+
+	private int getPlayerId(String msg) {
 		return Integer.parseInt((msg.split("_"))[1]);
 	}
 }
