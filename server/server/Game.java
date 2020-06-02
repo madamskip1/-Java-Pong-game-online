@@ -12,14 +12,15 @@ public class Game
 		GAMEOVER
 	}
 	
-	private static final int PLAYERS = 2;
+	public static final int PLAYERS = 2;
 	private Player players[];
 	private Bumper playersBumpers[];
 	private ServerProtocol Protocol;
 	private Balls Balls;
+	private Powerups Powerups;
 	private States State;
 	private int FPS = 60;
-	private int[] Score = {0,0};
+		
 		
 	public Game(ServerProtocol _prot)
 	{
@@ -30,6 +31,7 @@ public class Game
 		
 		setupPlayers();
 		setupFirstBall();
+		Powerups = new Powerups();
 		
 		Protocol.writeGameStateProtocol("INIT", "1");
 		State = States.INITIALIZED;
@@ -64,9 +66,9 @@ public class Game
 	{
 		Balls = new Balls();
 		Balls.addBall(Ball.generateBall(server.Board.WIDTH, server.Board.HEIGHT));
-		Balls.addBall(Ball.generateBall(server.Board.WIDTH, server.Board.HEIGHT));
-		Balls.addBall(Ball.generateBall(server.Board.WIDTH, server.Board.HEIGHT));
-		Balls.addBall(Ball.generateBall(server.Board.WIDTH, server.Board.HEIGHT));
+		//Balls.addBall(Ball.generateBall(server.Board.WIDTH, server.Board.HEIGHT));
+		//Balls.addBall(Ball.generateBall(server.Board.WIDTH, server.Board.HEIGHT));
+		//Balls.addBall(Ball.generateBall(server.Board.WIDTH, server.Board.HEIGHT));
 		Protocol.writeBallProtocol(("POSITION;" + Balls.size()), Balls.serialize());
 	}
 	
@@ -90,7 +92,7 @@ public class Game
 	}
 	
 		
-	private void update()
+	private void update(long deltaTime)
 	{
 
 		Balls.update();
@@ -100,7 +102,6 @@ public class Game
 		
 		// Check collision
 		// Check gameEnd
-		Balls.updateScore(Score);
 	}
 	
 	private void sendEverything()
@@ -110,6 +111,7 @@ public class Game
 		Protocol.writePlayerProtocol(0, "MOVE", pos.x + "," + pos.y);
 		pos = players[1].getPosition();
 		Protocol.writePlayerProtocol(1, "MOVE", pos.x + "," + pos.y);
+		Protocol.writePowerUpProtocol(("POSITION;" + Powerups.size()), Powerups.serialize());
 	}
 	
 	
@@ -133,7 +135,7 @@ public class Game
 				lastTime = now;
 				//delta = update /  timeBetweenUpdates;
 				
-				update();
+				update(update);
 				sendEverything();
 			}
 			

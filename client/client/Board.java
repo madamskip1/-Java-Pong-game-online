@@ -16,6 +16,7 @@ public class Board extends JPanel {
 	
 	private Balls balls;
 	private Bumper Bumpers[];
+	private Powerups Powerups;
 	//private 
 		
 	public Board(Keyboard keyB) {
@@ -39,6 +40,11 @@ public class Board extends JPanel {
 		Bumpers[n] = _bumper;
 	}
 	
+	public void setPowerups(Powerups _powers)
+	{
+		Powerups = _powers;
+	}
+	
 	
 	//public void setPowerups()
 	
@@ -53,7 +59,7 @@ public class Board extends JPanel {
 		balls.draw(g2d);
 		Bumpers[0].draw(g2d, 0);
 		Bumpers[1].draw(g2d, 1);
-		//Powerup d = new Powerup();
+		Powerups.draw(g2d);
 		//d.draw(g2d);
 //		Powerup.draw(g2d);
 		

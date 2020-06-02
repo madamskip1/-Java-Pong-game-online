@@ -57,6 +57,16 @@ public class ServerProtocol {
 		}		
 	}
 	
+		public void writePowerUpProtocol(String settings, String msg)
+	{
+		try {
+			write("POWERUP;" + settings + ";" + msg);
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void writeGameStateProtocol(String settings, String msg)
 	{
 		try {

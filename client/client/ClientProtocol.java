@@ -63,7 +63,6 @@ public class ClientProtocol {
 	}
 
 	private void readBallProtocol(String settings, String mainMsg) {
-		System.out.println(mainMsg);
 		if (settings.equals("POSITION")) {
 			Matcher match = twoPattern.matcher(mainMsg);
 			if (match.matches())
@@ -72,7 +71,17 @@ public class ClientProtocol {
 				game.zeroBalls(); // inaczej nie znikna
 		}
 	}
-
+	
+	private void readPowerupProtocol(String settings, String mainMsg) {
+		if (settings.equals("POSITION")) {
+			Matcher match = twoPattern.matcher(mainMsg);
+			if (match.matches())
+				game.Powerup(Integer.parseInt(match.group(1)), match.group(2));
+			else
+				game.zeroPowerups(); // inaczej nie znikna
+		}
+	}
+	
 	private void readStateProtocol(String settings, String mainMsg) {
 		if (settings.equals("INIT")) {
 

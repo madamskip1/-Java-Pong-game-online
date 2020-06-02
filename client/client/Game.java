@@ -12,6 +12,7 @@ public class Game {
 	private Board Board;
 	private Keyboard Keyboard;
 	private Balls Balls;
+	private Powerups Powerups;
 	private Score Scores[];
 	
 	private int FPS = 60;
@@ -34,6 +35,7 @@ public class Game {
 		Players[0] = new Player();
 		Players[1] = new Player();
 		Balls = new Balls();
+		Powerups = new Powerups();
 	}
 	
 	public void setProtocol(ClientProtocol _prot)
@@ -53,6 +55,13 @@ public class Game {
 		Vector<Ball> newBalls = Balls.deserialize(ballsString);
 		
 		Balls.setBalls(newBalls);
+	}
+	
+	public void Powerup(int numOfPowerups, String powerupsString)
+	{
+		Vector<Powerup> newPowers = Powerups.deserialize(powerupsString);
+		
+		
 	}
 	
 	public void PlayerPos(int player, int x, int y)
@@ -96,6 +105,7 @@ public class Game {
 		Board.setBalls(Balls);
 		Board.setBumper(Players[0].getBumper(), 0);
 		Board.setBumper(Players[1].getBumper(), 1);
+		Board.setPowerups(Powerups);
 		Window.setBoard(Board);
 		Window.setTopPanel(TopPanel);
 		
@@ -189,5 +199,10 @@ public class Game {
 	
 	public void zeroBalls() {
 		Balls.clearBalls();
+	}
+	
+	public void zeroPowerups()
+	{
+		Powerups.clearPowerups();
 	}
 }

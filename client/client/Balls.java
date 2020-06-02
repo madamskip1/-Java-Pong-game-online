@@ -18,7 +18,8 @@ public class Balls {
 
 		for (String ball : splitted) {
 			singleBall = ball.split(",");
-			toReturn.add(new Ball(Integer.parseInt(singleBall[0]), Integer.parseInt(singleBall[1]),
+			toReturn.add(new Ball(Integer.parseInt(singleBall[0]),
+					Integer.parseInt(singleBall[1]),
 					Integer.parseInt(singleBall[2])));
 		}
 

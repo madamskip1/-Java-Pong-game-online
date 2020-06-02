@@ -8,7 +8,14 @@ import java.awt.image.BufferedImage;
 
 public class Powerup {
 	BufferedImage sprite;
+	private Point pos;
+	private Powerups.PowerupTypes type;
 	
+	public Powerup(int x, int y, Powerups.PowerupTypes typ)
+	{
+		pos = new Point(x, y);
+		type = typ;
+	}
 
 	public void draw(Graphics2D g) {
 		ImageLoader il = new ImageLoader();
