@@ -43,7 +43,12 @@ public class Player {
 	
 	public void resetSpeed() { setSpeed(DEFAULT_SPEED); }
 	
-	public Point getPosition() { return bumper.getPosition(); }
+	public Point getPosition() { return bumper.getPosition(); }	
+	
+	public Bumper getBumper()
+	{
+		return bumper;
+	}
 	
 	public void update()
 	{

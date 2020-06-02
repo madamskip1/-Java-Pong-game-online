@@ -18,6 +18,7 @@ public class Game
 	private ServerProtocol Protocol;
 	private Balls Balls;
 	private Powerups Powerups;
+	private Effects Effects;
 	private States State;
 	private int FPS = 60;
 		
@@ -32,6 +33,8 @@ public class Game
 		setupPlayers();
 		setupFirstBall();
 		Powerups = new Powerups();
+		Effects = new Effects();
+		Powerups.setEffects(Effects);
 		
 		Protocol.writeGameStateProtocol("INIT", "1");
 		State = States.INITIALIZED;

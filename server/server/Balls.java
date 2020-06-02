@@ -67,9 +67,8 @@ public class Balls {
 			return true;
 	}
 	
-	public void multiple(int index)
+	public void multiple(Ball ball)
 	{
-		Ball ballToMultiple = _balls.get(index);
 		
 		// Tutaj trochê matematyki, ¿eby je stworzyæ.
 		// Ogólnie moja koncepcja jest, ¿eby siê rozbija³a ta pi³ka na trzy odchylone o k¹t 30 stopni
@@ -80,6 +79,6 @@ public class Balls {
 		int size = size();
 		
 		for (int i = 0; i < size; i++)
-			multiple(i);
+			multiple(_balls.get(i));
 	}
 }

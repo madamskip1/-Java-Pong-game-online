@@ -31,7 +31,12 @@ public class Powerup {
 		return Type;
 	}
 	
-	public void hitBy(Balls balls, int index) {} // metoda wirtualna
+	public void setType(Powerups.PowerupTypes typ)
+	{
+		Type = typ;
+	}
+	
+	public server.Effect hitBy(Balls balls, Ball ball) { return null; } // metoda wirtualna
 
 	
 }

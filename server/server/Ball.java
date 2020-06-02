@@ -74,6 +74,11 @@ public class Ball {
 		this.velocity.x = x;
 		this.velocity.y = y;
 	}
+	
+	public int touchBy()
+	{
+		return touchByPlayer;
+	}
 
 	public void setVelocity(Vector2d vec) {
 		this.setVelocity(vec.x, vec.y);
