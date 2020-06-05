@@ -1,4 +1,4 @@
-package client;
+	package client;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -23,6 +23,10 @@ public class Score {
 	
 	public void setScore(int x) {
 		score = x;
+	}
+	
+	public int getScore() {
+		return score;
 	}
 	
 	public void setPosition(int x, int y)

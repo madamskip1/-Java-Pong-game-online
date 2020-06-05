@@ -1,4 +1,4 @@
-package powerups;
+package powerup;
 
 public class PlayerPowerup extends server.Powerup
 {
@@ -45,7 +45,8 @@ public class PlayerPowerup extends server.Powerup
 	
 	private server.Player forPlayer(int index)
 	{
-
+		System.out.println(For == server.Powerups.PowerupFor.ME);
+		
 		if (For == server.Powerups.PowerupFor.ME)
 			return Powerups.getPlayer(index);
 

@@ -20,7 +20,7 @@ public class Ball {
 		position = new Point(x,y);
 		radius = r;
 	}
-	
+
 	
 	public void drawBall(Graphics2D g) {
 		g.setColor(BALL_COLOR);

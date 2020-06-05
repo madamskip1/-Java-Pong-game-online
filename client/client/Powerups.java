@@ -4,8 +4,9 @@ import java.awt.Graphics2D;
 import java.util.Vector;
 
 public class Powerups {
+	static private ImageLoader iLoader;
 	private Vector<Powerup> powerups;
-	
+
 	public enum PowerupTypes
 	{
 		BALL_MULTIPLE_SINGLE,
@@ -25,6 +26,11 @@ public class Powerups {
 	public Powerups()
 	{
 		powerups = new Vector<Powerup>();
+		iLoader = new ImageLoader();
+	}
+	
+	public int size() {
+		return powerups.size();
 	}
 	
 	public static Vector<Powerup> deserialize(String stringWithPowerups)
@@ -42,9 +48,8 @@ public class Powerups {
 			type = Powerups.intToType(Integer.parseInt(singlePowerup[2]));
 			toReturn.add(new Powerup(Integer.parseInt(singlePowerup[0]),
 					Integer.parseInt(singlePowerup[1]),
-					type));
+					type, iLoader));
 		}
-		
 		return toReturn;
 	}
 	
@@ -65,7 +70,7 @@ public class Powerups {
 	
 	public void draw(Graphics2D g)
 	{
-		for (Powerup Pu : powerups)
+		for (Powerup Pu : powerups) 
 			Pu.draw(g);
 	}
 }

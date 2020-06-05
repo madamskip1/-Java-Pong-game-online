@@ -34,6 +34,7 @@ public class Ball {
 		min = boardHeight * 1 / 5;
 		max = boardHeight * 4 / 5;
 		int y = Utility.randomInt(min, max);
+		y=boardHeight/2;///////////////////////////////////////////////////
 		_ball.setPosition(x, y);
 
 		x = Utility.randomInt(5, 100);
@@ -44,8 +45,8 @@ public class Ball {
 		if (Utility.randomInt(0, 100) <= 50)
 			y *= -1;
 
-		x=2;
-		y=-2;
+		x=10;
+		y=0;
 		
 		
 		_ball.setVelocity(x, y);
@@ -84,6 +85,10 @@ public class Ball {
 		this.setVelocity(vec.x, vec.y);
 	}
 
+	public Vector2d getVelocity() {
+		return velocity;
+	}
+	
 	public boolean update() {
 		position.add(velocity.x, velocity.y);
 
@@ -104,18 +109,18 @@ public class Ball {
 	public boolean bumperCollision(Bumper b1, Bumper b2) {
 
 		if (velocity.x > 0) {
-			if (Utility.CircleRectangleCollision(position, radius, b2.getPosition(), b2.getHeight(), b2.getWidth())) {
+			if (Utility.CircleRectangleCollision(position, radius, b2.getPosition(), b2.getWidth(), b2.getHeight())) {
 				velocity.negateX();
 				spin(b1);
-				touchByPlayer = 0;
+				touchByPlayer = 1;
 				return true;
 			}
 
 		} else {
-			if (Utility.CircleRectangleCollision(position, radius, b1.getPosition(), b1.getHeight(), b1.getWidth())) {
+			if (Utility.CircleRectangleCollision(position, radius, b1.getPosition(), b1.getWidth(), b1.getHeight())) {
 				velocity.negateX();
 				spin(b2);
-				touchByPlayer = 1;
+				touchByPlayer = 0;
 				return true;
 			}
 		}
@@ -123,29 +128,8 @@ public class Ball {
 	}
 
 	public boolean powerupCollisionCheck(Powerup pp) {
-
-		// Tutaj do tego te¿ masz gotow¹ funkcje w Server.Utility
-
-		int testX = 0;
-		int testY = 0;
-
-		if (position.x < pp.getPosition().x)
-			testX = pp.getPosition().x; // left edge
-		else if (position.x > pp.getPosition().x)
-			testX = pp.getPosition().x + pp.getSize(); // right edge
-		if (position.y < pp.getPosition().y)
-			testY = pp.getPosition().y; // top edge
-		else if (position.y > pp.getPosition().y)
-			testY = pp.getPosition().y + pp.getSize(); // bottom edge
-
-		int distX = position.x - testX;
-		int distY = position.y - testY;
-		double distance = Math.sqrt((distX * distX) + (distY * distY));
-
-		if (distance <= radius)
-			return true;
-
-		return false;
+		return Utility.CircleRectangleCollision(position, radius, pp.getPosition(), pp.getSize(), pp.getSize());
+	
 	}
 
 	public boolean addToScore(int score[]) {

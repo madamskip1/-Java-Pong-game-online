@@ -1,4 +1,4 @@
-package server;
+	package server;
 
 import java.util.Vector;
 
@@ -71,6 +71,7 @@ public class Powerups {
 	
 	public Player getPlayer(int index)
 	{
+		System.out.println(players.length);
 		return players[index];
 	}
 	
@@ -84,6 +85,19 @@ public class Powerups {
 		return powerups.size();
 	}
 	
+	public void ballsCollisions(Balls balls) {
+		for(Powerup p : powerups) {
+			for(int i=0; i<balls.size();++i) {
+				Ball b = balls.getBall(i);
+				if(b.powerupCollisionCheck(p)) {
+					powerupHitted(p, balls, b);
+				}
+				
+			}
+		}
+		}
+	
+	
 	
 	public void powerupHitted(Powerup powerup, Balls balls, Ball ball)
 	{
@@ -93,7 +107,6 @@ public class Powerups {
 		
 		powerups.remove(powerup);
 	}
-	
 	
 	
 	
@@ -174,7 +187,7 @@ public class Powerups {
 		int ranInt = Utility.randomInt(0, BallPowerupTypes.values().length - 1);
 		int x = ranX();
 		int y = ranY();
-		Powerup powerup = new powerups.BallPowerup(x, y, BallPowerupTypes.values()[ranInt]);
+		Powerup powerup = new powerup.BallPowerup(x, y, BallPowerupTypes.values()[ranInt]);
 		
 		return powerup;
 	}
@@ -186,7 +199,7 @@ public class Powerups {
 		int x = ranX();
 		int y = ranY();
 		
-		Powerup powerup = new powerups.PlayerPowerup(x, y, PlayerPowerupTypes.values()[ranInt], who);
+		Powerup powerup = new powerup.PlayerPowerup(x, y, PlayerPowerupTypes.values()[ranInt], who);
 		
 		return powerup;
 	}

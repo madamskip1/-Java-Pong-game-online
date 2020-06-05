@@ -9,6 +9,10 @@ public class Balls {
 	public Balls() {
 		_balls = new Vector<Ball>();
 	}
+	
+	public int size() {
+		return _balls.size();
+	}
 
 	public static Vector<Ball> deserialize(String stringWithBalls) {
 		Vector<Ball> toReturn = new Vector<Ball>();
@@ -34,6 +38,7 @@ public class Balls {
 		for (Ball b : _balls)
 			b.drawBall(g);
 	}
+	
 
 	public void clearBalls() {
 		_balls.clear();

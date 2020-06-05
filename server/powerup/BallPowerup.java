@@ -1,4 +1,4 @@
-package powerups;
+package powerup;
 
 public class BallPowerup extends server.Powerup
 {

@@ -34,6 +34,8 @@ public class ClientProtocol {
 			else if (obj.equals("STATE"))
 				readStateProtocol(settings, mainMsg);
 
+			else if(obj.equals("POWERUP"))
+				readPowerupProtocol(settings, mainMsg);
 		}
 	}
 
@@ -76,7 +78,7 @@ public class ClientProtocol {
 		if (settings.equals("POSITION")) {
 			Matcher match = twoPattern.matcher(mainMsg);
 			if (match.matches())
-				game.Powerup(Integer.parseInt(match.group(1)), match.group(2));
+				game.Powerups(Integer.parseInt(match.group(1)), match.group(2));
 			else
 				game.zeroPowerups(); // inaczej nie znikna
 		}

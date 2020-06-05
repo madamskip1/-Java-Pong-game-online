@@ -13,7 +13,7 @@ public class Game {
 	private Keyboard Keyboard;
 	private Balls Balls;
 	private Powerups Powerups;
-	private Score Scores[];
+	protected static Score Scores[];
 	
 	private int FPS = 60;
 	
@@ -26,7 +26,7 @@ public class Game {
 		GAMEOVER
 	}
 	
-	private States State;
+	protected static States State;
 	
 	public Game()
 	{
@@ -57,11 +57,11 @@ public class Game {
 		Balls.setBalls(newBalls);
 	}
 	
-	public void Powerup(int numOfPowerups, String powerupsString)
+	public void Powerups(int numOfPowerups, String powerupsString)
 	{
 		Vector<Powerup> newPowers = Powerups.deserialize(powerupsString);
 		
-		
+		Powerups.setPowerups(newPowers);
 	}
 	
 	public void PlayerPos(int player, int x, int y)
@@ -163,6 +163,7 @@ public class Game {
 			// update(delta)   - to wykorzystamy do zmniejszenia efektu wizualnego laga
 			
 			Board.repaint();
+
 		}
 		
 	}

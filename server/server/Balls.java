@@ -3,6 +3,7 @@ package server;
 import java.util.Vector;
 
 public class Balls {
+	public final double DISPERSION = 30;
 	private Vector<Ball> _balls;
 
 	public Balls() {
@@ -67,11 +68,19 @@ public class Balls {
 			return true;
 	}
 	
-	public void multiple(Ball ball)
+	public void multiple(Ball ballToMultiple)//chyba git ale moze cos pomylilem z katami; sie sprawdzi potem
 	{
+		Vector2d vel = ballToMultiple.getVelocity();
+		double angle = Math.atan((double)vel.y / (double)vel.x);
+		double totalSpeed = Math.sqrt(vel.x*vel.x + vel.y+vel.y);
 		
-		// Tutaj trochê matematyki, ¿eby je stworzyæ.
-		// Ogólnie moja koncepcja jest, ¿eby siê rozbija³a ta pi³ka na trzy odchylone o k¹t 30 stopni
+		Ball newBall1 = ballToMultiple.clone();
+		Ball newBall2 = ballToMultiple.clone();
+		newBall1.setVelocity((int)(totalSpeed*Math.cos(angle+DISPERSION)), (int)(totalSpeed*Math.sin(angle+DISPERSION)));
+		newBall2.setVelocity((int)(totalSpeed*Math.cos(angle-DISPERSION)), (int)(totalSpeed*Math.sin(angle-DISPERSION)));
+		_balls.add(newBall1);
+		_balls.add(newBall2);
+		
 	}
 	
 	public void multipleAll()
