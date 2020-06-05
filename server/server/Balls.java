@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.Vector;
 
 public class Balls {
-	public final double DISPERSION = 25.0;
+	public final double DISPERSION = 25;
 	private Vector<Ball> _balls;
 
 	public Balls() {
@@ -49,7 +49,7 @@ public class Balls {
 		}
 	}
 
-	public void updateScore(int score[]) {
+	public void updateScore(int score[]) {// tu moze byc cos
 		for (Iterator<Ball> it = _balls.iterator(); it.hasNext();) {
 			Ball p = it.next();
 			if (p.addToScore(score)) {
@@ -72,23 +72,23 @@ public class Balls {
 	}
 
 	public void multiple(Ball ballToMultiple)
-	{
-		Vector2d vel = ballToMultiple.getVelocity();
-		double totalSpeed = Math.sqrt(vel.x * vel.x + vel.y * vel.y);
-		double angle = Math.atan2(vel.y, vel.x);
-		double angle1 = Math.toRadians(DISPERSION);
-		
-		Ball newBall1 = ballToMultiple.clone();
-		Ball newBall2 = ballToMultiple.clone();
-  		newBall1.setVelocity((int) (totalSpeed * Math.cos(angle + angle1)),
-				(int) (totalSpeed * Math.sin(angle + angle1)));
-		newBall2.setVelocity((int) (totalSpeed * Math.cos(angle - angle1)),
-				(int) (totalSpeed * Math.sin(angle - angle1)));
-
-		_balls.add(newBall1);
-		_balls.add(newBall2);
-
-	}
+    {
+        Vector2d vel = ballToMultiple.getVelocity();
+        double totalSpeed = Math.sqrt(vel.x * vel.x + vel.y * vel.y);
+        double angle = Math.atan2(vel.y, vel.x);
+        double angle1 = Math.toRadians(DISPERSION);
+       
+        Ball newBall1 = ballToMultiple.clone();
+        Ball newBall2 = ballToMultiple.clone();
+        newBall1.setVelocity((int) (totalSpeed * Math.cos(angle + angle1)),
+                (int) (totalSpeed * Math.sin(angle + angle1)));
+        newBall2.setVelocity((int) (totalSpeed * Math.cos(angle - angle1)),
+                (int) (totalSpeed * Math.sin(angle - angle1)));
+ 
+        _balls.add(newBall1);
+        _balls.add(newBall2);
+ 
+    }
 
 	public void multipleAll() {
 		int size = size();

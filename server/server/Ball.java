@@ -4,12 +4,14 @@ import java.util.Random;
 
 public class Ball {
 	public static final int DEFAULT_RADIUS = 15;
-	public static final double FRICTION = 0.5;
+	public static final double FRICTION = 5;
 	private Point position;
 	private Vector2d velocity;
 	private int radius;
 	private int touchByPlayer;// 0 == L ; 1 == P
-
+	private Vector2d previousVelocity;
+	
+	
 	public Ball() {
 		position = new Point(0, 0);
 		velocity = new Vector2d(0, 0);
@@ -34,6 +36,8 @@ public class Ball {
 		min = boardHeight * 1 / 5;
 		max = boardHeight * 4 / 5;
 		int y = Utility.randomInt(min, max);
+		y=boardHeight/2;///////////////////////////////////////////////////
+		x=510;
 		_ball.setPosition(x, y);
 
 		x = Utility.randomInt(5, 100);
@@ -44,8 +48,8 @@ public class Ball {
 		if (Utility.randomInt(0, 100) <= 50)
 			y *= -1;
 
-		x=3;
-		y=0;
+		x=0;
+		y=10;
 		
 		
 		_ball.setVelocity(x, y);
@@ -75,6 +79,16 @@ public class Ball {
 		this.velocity.y = y;
 	}
 	
+	public void returnToPreviousVelocity()
+	{
+		velocity = previousVelocity.clone();
+	}
+	
+	public void saveVelocity()
+	{
+		previousVelocity = velocity.clone(); 
+	}
+
 	public int touchBy()
 	{
 		return touchByPlayer;

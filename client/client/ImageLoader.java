@@ -52,8 +52,8 @@ public class ImageLoader {
 		list[PowerupTypes.OPPONENT_SMALL.ordinal()] = "images/smallNME.png";
 		list[PowerupTypes.BALL_MULTIPLE_SINGLE.ordinal()] = "images/splitBall.png";
 		list[PowerupTypes.BALL_MULTIPLE_ALL.ordinal()] = "images/multipleAll.png";
-		list[PowerupTypes.BALL_FAST.ordinal()] = "images/speedBall.png";
 		list[PowerupTypes.BALL_SLOW.ordinal()] = "images/slowBall.png";		
+		list[PowerupTypes.BALL_FAST.ordinal()] = "images/speedBall.png";
 		return list;
 	}
 	
