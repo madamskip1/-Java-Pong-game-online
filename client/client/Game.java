@@ -14,7 +14,6 @@ public class Game {
 	private Balls Balls;
 	private Powerups Powerups;
 	protected static Score Scores[];
-	
 	private int FPS = 60;
 	
 	public enum States
@@ -22,6 +21,7 @@ public class Game {
 		BEFORE_INIT,
 		INIT,
 		INITIALIZED,
+		ACCEPTED,
 		RUNNING,
 		GAMEOVER
 	}
@@ -36,6 +36,7 @@ public class Game {
 		Players[1] = new Player();
 		Balls = new Balls();
 		Powerups = new Powerups();
+		//init();
 	}
 	
 	public void setProtocol(ClientProtocol _prot)
@@ -110,6 +111,7 @@ public class Game {
 		Window.setTopPanel(TopPanel);
 		
 		Window.createAndShowGUI();
+		Board.repaint();
 	}
 	
 	public void initialized()
@@ -117,7 +119,7 @@ public class Game {
 		State = States.INITIALIZED;
 		// Tutaj rysujesz po do³¹czeniu drugiego gracza:
 		//  * ¯e czekasz na akceptacjê (to dopiero dodamy, póki co startuje automatycznie)
-	
+		Board.repaint();
 	}
 	
 	public void start()
@@ -182,6 +184,9 @@ public class Game {
 		case 83:
 			Protocol.writePlayerProtocol("DIR", "DOWN");
 			break;
+		case 32:
+			accept();
+			break;
 		}
 	}
 	
@@ -195,6 +200,16 @@ public class Game {
 		case 83:
 			Protocol.writePlayerProtocol("DIR", "NONE");
 			break;
+		}
+	}
+	
+	public void accept()
+	{
+		if (State == Game.States.INITIALIZED || State == Game.States.ACCEPTED)
+		{
+			State = Game.States.ACCEPTED;
+			Board.repaint();
+			Protocol.writeAcceptProtocol();
 		}
 	}
 	

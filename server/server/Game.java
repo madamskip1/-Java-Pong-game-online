@@ -4,12 +4,14 @@ import client.Game.States;
 
 public class Game {
 	public enum States {
-		INIT, INITIALIZED, RUNNING, GAMEOVER
+		INIT, INITIALIZED, RUNNING, GAMEOVER,
+		ACCEPTED
 	}
 
 	public static final int PLAYERS = 2;
 	private Player players[];
 	private Bumper playersBumpers[];
+	public boolean Accepted[];
 	private ServerProtocol Protocol;
 	private Balls Balls;
 	private Powerups Powerups;
@@ -30,9 +32,10 @@ public class Game {
 		setupFirstBall();
 		Powerups.setEffects(Effects);
 		Protocol.writeGameStateProtocol("INIT", "1");
+		Accepted = new boolean[2];
+		Accepted[0] = Accepted[1] = false;
 		State = States.INITIALIZED;
-
-		start();
+		
 	}
 
 	public void setupPlayers() {
@@ -63,12 +66,26 @@ public class Game {
 	public void setupFirstBall() {
 		Balls = new Balls();
 		Balls.addBall(Ball.generateBall(server.Board.WIDTH, server.Board.HEIGHT));
-		// Balls.addBall(Ball.generateBall(server.Board.WIDTH, server.Board.HEIGHT));
-		// Balls.addBall(Ball.generateBall(server.Board.WIDTH, server.Board.HEIGHT));
-		// Balls.addBall(Ball.generateBall(server.Board.WIDTH, server.Board.HEIGHT));
 		Protocol.writeBallProtocol(("POSITION;" + Balls.size()), Balls.serialize());
 	}
 
+	public void checkAccepted()
+	{
+		
+		if (Accepted[0] && Accepted[1])
+		{
+			State = States.ACCEPTED;
+		}
+	}
+	
+	public void initalized()
+	{
+		while (State == States.INITIALIZED)
+			checkAccepted();
+		
+		start();
+	}
+	
 	public Player[] getPlayers() {
 		return players;
 	}

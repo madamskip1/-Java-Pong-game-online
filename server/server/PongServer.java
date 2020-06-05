@@ -54,7 +54,9 @@ public class PongServer {
 		player1.OutputStream.writeUTF("PLAYER;OPPONENT;1");
 		
 		Game = new Game(protocol);
+		protocol.setGame(Game);
 		
+		Game.initalized();
 		// Zrobiæ koñczenie po³¹czenia
 	}
 	

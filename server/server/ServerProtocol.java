@@ -8,6 +8,7 @@ public class ServerProtocol {
 	private final Pattern mainPattern;
 	private Player players[];
 	private static PongServer server;
+	private Game Game;
 
 	public ServerProtocol(PongServer _serv) {
 		server = _serv;
@@ -19,6 +20,11 @@ public class ServerProtocol {
 		players[0] = player0;
 		players[1] = player1;
 	}
+	
+	public void setGame(Game game)
+	{
+		Game = game;
+	}
 
 	public void read(int PlayerID, String msg) {
 		Matcher match = mainPattern.matcher(msg);
@@ -28,8 +34,9 @@ public class ServerProtocol {
 		String mainMsg = match.group(3);
 
 		if (obj.equals("PLAYER"))
-			;
-		readPlayerProtocol(PlayerID, settings, mainMsg);
+			readPlayerProtocol(PlayerID, settings, mainMsg);
+		else if(obj.equals("ACCEPT"))
+			readAcceptProtocol(PlayerID);
 	}
 
 	private void write(String msg) throws IOException {
@@ -90,6 +97,10 @@ public class ServerProtocol {
 			
 			playerID = (playerID + 1) % 2;
 		}
-
+	}
+	
+	private void readAcceptProtocol(int playerID)
+	{
+		Game.Accepted[playerID] = true;
 	}
 }

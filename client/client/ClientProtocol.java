@@ -99,6 +99,15 @@ public class ClientProtocol {
 			e.printStackTrace();
 		}
 	}
+	
+	public void writeAcceptProtocol()
+	{
+		try {
+			write("ACCEPT;1;1");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	private int getPlayerId(String msg) {
 		return Integer.parseInt((msg.split("_"))[1]);

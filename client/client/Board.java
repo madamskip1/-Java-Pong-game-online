@@ -18,10 +18,12 @@ public class Board extends JPanel {
 	public static final Color LINE_COLOR = new Color(207, 224, 252);
 	public static final int X_PADDING = 10;
 
-	private final Color textColor = Color.white;
+	private final Color textColor = Color.WHITE;
 	private final String waitingMsg = "Waiting for another player";
 	private final String leftWon = "Left player has won!";
 	private final String rightWon = "Right player has won!";
+	private final String waitAccept = "Click space to start";
+	private final String acceptedMsg = "Waiting for another player's accept.";
 
 	private Balls balls;
 	private Bumper Bumpers[];
@@ -55,33 +57,42 @@ public class Board extends JPanel {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
 
-		if (Game.State == States.INIT || Game.State == States.GAMEOVER) {
-			Font font = new Font("Skia", Font.PLAIN, 40);
-			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-			g2d.setColor(BACKGROUND_COLOR);
+		if (!(Game.State == Game.States.RUNNING)) {
+			g2d.setColor(Color.BLACK);
 			g2d.fillRect(0, 0, WIDTH, HEIGHT);
+			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+			Font font = new Font("Skia", Font.PLAIN, 20);
+			
+
 			g2d.setFont(font);
 			g2d.setColor(textColor);
+			
+			if (Game.State == Game.States.INIT)
+				g2d.drawString(waitingMsg, WIDTH / 2, HEIGHT / 2);
+			else if (Game.State == Game.States.GAMEOVER) {
+				if (Game.Scores[0].getScore() > Game.Scores[1].getScore())
+					g2d.drawString(leftWon, WIDTH / 2, HEIGHT / 2);
+				else 
+					g2d.drawString(rightWon, WIDTH / 2, HEIGHT / 2);
+				
+			} else if (Game.State == Game.States.ACCEPTED)
+				g2d.drawString(acceptedMsg, WIDTH / 2, HEIGHT / 2);
+			else if (Game.State == Game.States.INITIALIZED)
+				g2d.drawString(waitAccept, WIDTH / 2, HEIGHT / 2);
 
-			if (Game.State == States.INIT)
-				g2d.drawString(waitingMsg, HEIGHT / 2, WIDTH / 2);
-
-			else if (Game.State == States.GAMEOVER) {
-				if (Game.Scores[0].getScore() > Game.Scores[1].getScore()) {
-					g2d.drawString(leftWon, HEIGHT / 2, WIDTH / 2);
-				} else {
-					g2d.drawString(rightWon, HEIGHT / 2, WIDTH / 2);
-				}
-			}
 		}
-		g2d.setColor(LINE_COLOR);
-		g2d.fillRect(WIDTH / 2 - 1, 0, 2, HEIGHT);
+		else
+		{
+			g2d.setColor(LINE_COLOR);
+			g2d.fillRect(WIDTH / 2 - 1, 0, 2, HEIGHT);
 
-		balls.draw(g2d);
-		Bumpers[0].draw(g2d, 0);
-		Bumpers[1].draw(g2d, 1);
-		Powerups.draw(g2d);
+			balls.draw(g2d);
+			Bumpers[0].draw(g2d, 0);
+			Bumpers[1].draw(g2d, 1);
+			Powerups.draw(g2d);
 
+		}
+	
 	}
 
 	@Override
