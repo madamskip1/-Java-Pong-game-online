@@ -81,6 +81,17 @@ public class Ball {
 	
 	public void returnToPreviousVelocity()
 	{
+		if ((velocity.x * previousVelocity.x) < 0)
+			previousVelocity.x *= -1;
+		else if (velocity.x == 0)
+			previousVelocity.x = 0;
+		
+		if ((velocity.y * previousVelocity.y) < 0)
+			previousVelocity.y *= -1;
+		else if (velocity.y == 0)
+			previousVelocity.y = 0;
+		
+		
 		velocity = previousVelocity.clone();
 	}
 	
