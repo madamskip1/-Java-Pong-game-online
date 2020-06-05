@@ -35,8 +35,8 @@ public class Balls {
 	}
 
 	public void draw(Graphics2D g) {
-		for (Ball b : _balls)
-			b.drawBall(g);
+		for (int i=0; i<_balls.size();++i)
+			_balls.get(i).drawBall(g);
 	}
 	
 

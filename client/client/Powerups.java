@@ -11,6 +11,8 @@ public class Powerups {
 	{
 		BALL_MULTIPLE_SINGLE,
 		BALL_MULTIPLE_ALL,
+		BALL_SLOW,
+		BALL_FAST,
 		ME_LONG,
 		ME_SMALL,
 		ME_SLOW,
@@ -21,6 +23,7 @@ public class Powerups {
 		OPPONENT_SLOW,
 		OPPONENT_FAST,
 		OPPONENT_BEER
+
 	}
 	
 	public Powerups()
@@ -70,7 +73,7 @@ public class Powerups {
 	
 	public void draw(Graphics2D g)
 	{
-		for (Powerup Pu : powerups) 
-			Pu.draw(g);
+		for (int i=0; i<powerups.size();++i) 
+			powerups.get(i).draw(g);
 	}
 }

@@ -71,7 +71,7 @@ public class Player {
 		
 		if (dy == 0)
 			return;
-		
+		bumper.setLastSpeed(dy);
 		bumper.move(dy);
 	}
 }
