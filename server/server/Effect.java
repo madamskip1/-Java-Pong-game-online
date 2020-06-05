@@ -2,14 +2,14 @@ package server;
 
 public class Effect
 {
-	private static final int TIME_TO_EXPIRE = 5; // sec
+	private static final long TIME_TO_EXPIRE = 5; // sec
 	double timeToExpire;
 	protected EffectsType type;
 	public EffectFor For;
 	
 	public enum EffectsType
 	{
-	 	BEER,
+//	 	BEER,
 		LONG,
 		SMALL,
 		SLOW,
@@ -33,7 +33,6 @@ public class Effect
 		timeToExpire -= (double) time / 1000000000;
 		if (timeToExpire <= 0)
 		{
-			System.out.println("Expire " + type + ", " + For);
 			expire();
 			return true;
 		}

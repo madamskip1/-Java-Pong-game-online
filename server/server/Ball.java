@@ -9,9 +9,7 @@ public class Ball {
 	private Vector2d velocity;
 	private int radius;
 	private int touchByPlayer;// 0 == L ; 1 == P
-	private Vector2d previousVelocity;
-	
-	
+
 	public Ball() {
 		position = new Point(0, 0);
 		velocity = new Vector2d(0, 0);
@@ -79,16 +77,6 @@ public class Ball {
 		this.velocity.y = y;
 	}
 	
-	public void returnToPreviousVelocity()
-	{
-		velocity = previousVelocity.clone();
-	}
-	
-	public void saveVelocity()
-	{
-		previousVelocity = velocity.clone(); 
-	}
-
 	public int touchBy()
 	{
 		return touchByPlayer;

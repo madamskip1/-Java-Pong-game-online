@@ -13,11 +13,6 @@ public class Powerup {
 		size = POWERUP_SIZE;
 	}
 	
-	public void print()
-	{
-		System.out.println(Type + " TYP; " + For + " FOR");
-	}
-	
 	public void setPowerups(Powerups pups)
 	{
 		Powerups = pups;

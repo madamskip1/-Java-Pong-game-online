@@ -1,9 +1,6 @@
 package powerup;
 
-import effects.BumperSize;
-
-public class PlayerPowerup extends server.Powerup
-{
+public class PlayerPowerup extends server.Powerup {
 	private server.Powerups.PlayerPowerupTypes playerType;
 	public PlayerPowerup(int x, int y, server.Powerups.PlayerPowerupTypes _playerType, server.Powerups.PowerupFor _For) {
 		super(x, y);
@@ -26,38 +23,22 @@ public class PlayerPowerup extends server.Powerup
 	public server.Effect hitBy(server.Balls balls, server.Ball ball)
 	{
 		server.Player player = forPlayer(ball.touchBy());
-		
-		server.Effect effect;
-		server.Effect.EffectsType type;
-		
-		switch (playerType)
-		{
+
+		switch (playerType) {
 		case LONG:
-			effect = new effects.BumperSize();
-			type = server.Effect.EffectsType.LONG;
-			break;
+			return Long(player);
 		case SMALL:
-			effect = new effects.BumperSize();
-			type = server.Effect.EffectsType.SMALL;
-			break;
-		case BEER:
-			effect = new effects.PlayerBeer();
-			type = server.Effect.EffectsType.BEER;
-			break;
+			return Small(player);
+//		case BEER:
+//			break;
 		case FAST:
-			effect = new effects.PlayerSpeed();
-			type = server.Effect.EffectsType.FAST;
-			break;
+			return Fast(player);
 		case SLOW:
-			effect = new effects.PlayerSpeed();
-			type = server.Effect.EffectsType.SLOW;
-			break;
+			return Slow(player);
 		default:
 			return null;
 		}
-		
-		effect = setupEffect(effect, player, type);
-		return effect;
+
 	}
 	
 	private server.Player forPlayer(int index)
@@ -67,14 +48,38 @@ public class PlayerPowerup extends server.Powerup
 		if (For == server.Powerups.PowerupFor.ME)
 			return server.Powerups.getPlayer(index);
 
-		return server.Powerups.getPlayer((index + 1)%2);
-			
+		return server.Powerups.getPlayer((index + 1) % 2);
+
 	}
-	
-	private server.Effect setupEffect(server.Effect effect, server.Player player, server.Effect.EffectsType typ)
-	{
+
+	private server.Effect Long(server.Player player) {
+		server.Effect effect = new effects.BumperSize();
 		effect.setPlayer(player);
-		effect.setType(typ);
+		effect.setType(server.Effect.EffectsType.LONG);
+		effect.For = server.Effect.EffectFor.PLAYER;
+		return effect;
+	}
+
+	private server.Effect Small(server.Player player) {
+		server.Effect effect = new effects.BumperSize();
+		effect.setPlayer(player);
+		effect.setType(server.Effect.EffectsType.SMALL);
+		effect.For = server.Effect.EffectFor.PLAYER;
+		return effect;
+	}
+
+	private server.Effect Slow(server.Player player) {
+		server.Effect effect = new effects.PlayerSpeed();
+		effect.setPlayer(player);
+		effect.setType(server.Effect.EffectsType.SLOW);
+		effect.For = server.Effect.EffectFor.PLAYER;
+		return effect;
+	}
+
+	private server.Effect Fast(server.Player player) {
+		server.Effect effect = new effects.PlayerSpeed();
+		effect.setPlayer(player);
+		effect.setType(server.Effect.EffectsType.FAST);
 		effect.For = server.Effect.EffectFor.PLAYER;
 		return effect;
 	}

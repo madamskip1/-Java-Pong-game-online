@@ -22,20 +22,6 @@ public class Bumper {
 	}
 
 	public void setHeight(int _height) {
-		if (height == _height) 
-			return;
-		
-		if (_height > height) 
-			Position.y -= height / 2;
-		else
-			Position.y += _height / 2;
-		
-		
-		if (Position.y < 0)
-			Position.y = 0;
-		else if ((Position.y + height) > server.Board.HEIGHT)
-			Position.y = server.Board.HEIGHT - height;
-		
 		height = _height;
 	}
 	

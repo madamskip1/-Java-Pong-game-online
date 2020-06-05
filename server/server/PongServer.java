@@ -7,7 +7,7 @@ public class PongServer {
 	
 	private static PongClientHandler player1;
 	private static PongClientHandler player2;
-	public static  ServerProtocol protocol;
+	private static  ServerProtocol protocol;
 	
 	private static ServerSocket Socket;
 	

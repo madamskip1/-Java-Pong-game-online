@@ -16,25 +16,22 @@ public class BumperSize extends PlayerEffect
 			makeSmall();
 			break;
 		}
-		
-		writeSize();
 	}
 	
 	protected void expire()
 	{
 		setBumperSize(server.Bumper.DEFAULT_WIDTH, server.Bumper.DEFAULT_HEIGHT);
-		writeSize();
 	}
 	
 	private void makeLong()
 	{
-		setBumperSize(server.Bumper.DEFAULT_WIDTH,
+		setBumperSize(server.Bumper.DEFAULT_WIDTH * MULTIPLE_SIZE,
 				server.Bumper.DEFAULT_HEIGHT * MULTIPLE_SIZE);
 	}
 	
 	private void makeSmall()
 	{
-		setBumperSize(server.Bumper.DEFAULT_WIDTH,
+		setBumperSize(server.Bumper.DEFAULT_WIDTH / MULTIPLE_SIZE,
 				server.Bumper.DEFAULT_HEIGHT / MULTIPLE_SIZE);
 	}
 	
@@ -42,13 +39,7 @@ public class BumperSize extends PlayerEffect
 	private void setBumperSize(int width, int height)
 	{
 		server.Bumper bumper = Player.getBumper();
-		bumper.setHeight(height);
-		bumper.setWidth(width);
-	}
-	
-	private void writeSize()
-	{
-		server.Bumper bump = Player.getBumper();
-		server.PongServer.protocol.writePlayerProtocol(Player.getPlayerID(), "SIZE", bump.getWidth() + "," + bump.getHeight());
+		bumper.setHeight(server.Bumper.DEFAULT_HEIGHT);
+		bumper.setWidth(server.Bumper.DEFAULT_HEIGHT);
 	}
 }
