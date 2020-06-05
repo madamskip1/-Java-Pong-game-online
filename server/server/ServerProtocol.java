@@ -69,14 +69,27 @@ public class ServerProtocol {
 	}
 
 	private void readPlayerProtocol(int playerID, String settings, String msg) {
-		if (settings.equals("DIR")) {
-			if (msg.equals("UP"))
-				players[playerID].goUp();
-			else if (msg.equals("DOWN"))
-				players[playerID].goDown();
-			else if (msg.equals("NONE"))
-				players[playerID].stop();
+		
+		//////////////////////////////////////////////
+		// 		Pêtla do testów i prezentacji  		//
+		//		Dziêki temu ruszaja sie oba			//
+		//////////////////////////////////////////////
+		
+		
+		for(int i = 0; i < 2; i++)
+		{
+			if (settings.equals("DIR")) {
+				if (msg.equals("UP"))
+					players[playerID].goUp();
+				else if (msg.equals("DOWN"))
+					players[playerID].goDown();
+				else if (msg.equals("NONE"))
+					players[playerID].stop();
 
+			}
+			
+			playerID = (playerID + 1) % 2;
 		}
+
 	}
 }

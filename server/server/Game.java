@@ -45,12 +45,12 @@ public class Game {
 		int yPosition = (server.Board.HEIGHT / 2) - (Bumper.DEFAULT_HEIGHT / 2);
 
 		playersBumpers[0].setPosition(server.Board.X_PADDING, yPosition);
-		players[0] = new Player(playersBumpers[0]);
+		players[0] = new Player(0, playersBumpers[0]);
 		Protocol.writePlayerProtocol(0, "MOVE", server.Board.X_PADDING + "," + yPosition);
 		Protocol.writePlayerProtocol(0, "SIZE", Bumper.DEFAULT_WIDTH + "," + Bumper.DEFAULT_HEIGHT);
 
 		playersBumpers[1].setPosition(server.Board.WIDTH - server.Board.X_PADDING - Bumper.DEFAULT_WIDTH, yPosition);
-		players[1] = new Player(playersBumpers[1]);
+		players[1] = new Player(1, playersBumpers[1]);
 		Protocol.writePlayerProtocol(1, "MOVE",
 				(server.Board.WIDTH - server.Board.X_PADDING - Bumper.DEFAULT_WIDTH) + "," + yPosition);
 		Protocol.writePlayerProtocol(1, "SIZE", Bumper.DEFAULT_WIDTH + "," + Bumper.DEFAULT_HEIGHT);
@@ -94,7 +94,7 @@ public class Game {
 		Powerups.ballsCollisions(Balls);
 		Balls.bumperCollisions(playersBumpers[0], playersBumpers[1]);
 		Balls.updateScore(score);
-
+		Effects.update(deltaTime);
 		Powerups.trySpawn(deltaTime);
 		// Check collision
 		// Check gameEnd
