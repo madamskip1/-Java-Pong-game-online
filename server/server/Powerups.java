@@ -4,8 +4,8 @@ import java.util.Iterator;
 import java.util.Vector;
 
 public class Powerups {
-	public static final long TIME_BEFORE_FIRST_PU = 2;
-	public static final long DEFAULT_TIME_BETWEEN_PU = 2;
+	public static final int TIME_BEFORE_FIRST_PU = 4; // sec
+	public static final int DEFAULT_TIME_BETWEEN_PU = 5; // sec
 	public static final int DEFAULT_CHANCE_TO_SPAWN = 5; // <1,1000>/1000 each frame
 
 	static private Player players[];
@@ -16,24 +16,40 @@ public class Powerups {
 	}
 
 	public enum PowerupTypes {
-		BALL_MULTIPLE_SINGLE, BALL_MULTIPLE_ALL, ME_LONG, ME_SMALL, ME_SLOW, ME_FAST,
-//		ME_BEER,
-		OPPONENT_LONG, OPPONENT_SMALL, OPPONENT_SLOW, OPPONENT_FAST,
-//		OPPONENT_BEER
+		BALL_MULTIPLE_SINGLE,
+		BALL_MULTIPLE_ALL,
+		BALL_FAST,
+		BALL_SLOW,
+		ME_LONG,
+		ME_SMALL,
+		ME_SLOW,
+		ME_FAST,
+		ME_BEER,
+		OPPONENT_LONG,
+		OPPONENT_SMALL,
+		OPPONENT_SLOW,
+		OPPONENT_FAST,
+		OPPONENT_BEER
 	};
 
 	public enum PlayerPowerupTypes {
-		LONG, SMALL, SLOW, FAST,
-//		BEER,
+		LONG,
+		SMALL,
+		SLOW,
+		FAST,
+		BEER,
 	}
 
 	public enum BallPowerupTypes {
-		MULTIPLE_SINGLE, MULTIPLE_ALL
+		MULTIPLE_SINGLE,
+		MULTIPLE_ALL,
+		FAST,
+		SLOW
 	}
 
 	private Vector<Powerup> powerups;
-	private long minTimeBetweenPU;
-	private long timeToNext;
+	private int minTimeBetweenPU;
+	private double timeToNext;
 	private int chanceToSpawn;
 
 	public Powerups() {
@@ -78,6 +94,7 @@ public class Powerups {
 
 	public void powerupHit(Powerup powerup, Balls balls, Ball ball) {
 		Effect effect = powerup.hitBy(balls, ball);
+		powerup.print();
 		if (effect != null)
 			Effects.add(effect);
 	}
@@ -86,6 +103,7 @@ public class Powerups {
 		if (powerUpTimer(deltaTime) && randIfSpawn()) {
 			int ranInt;
 			ranInt = Utility.randomInt(0, PowerupFor.values().length - 1);
+			//ranInt = PowerupFor.BALL.ordinal();
 			switch (PowerupFor.values()[ranInt]) {
 			case BALL:
 				powerups.add(CreateBallPowerUp());
@@ -131,7 +149,7 @@ public class Powerups {
 	}
 
 	private boolean powerUpTimer(long delta) {
-		timeToNext -= delta;
+		timeToNext -= (double) delta / 1000000000;
 		if (timeToNext <= 0) {
 			timeToNext = 0;
 			return true;
@@ -145,8 +163,10 @@ public class Powerups {
 		int ranInt = Utility.randomInt(0, BallPowerupTypes.values().length - 1);
 		int x = ranX();
 		int y = ranY();
+		
 		x = 500;
 		y = 0;/////////////
+		
 		Powerup powerup = new powerup.BallPowerup(x, y, BallPowerupTypes.values()[ranInt]);
 		return powerup;
 	}
@@ -156,27 +176,25 @@ public class Powerups {
 
 		int x = ranX();
 		int y = ranY();
+		
 		x = 500;
-		y = 0;//
+		y = 0;////////////////
+		
 		Powerup powerup = new powerup.PlayerPowerup(x, y, PlayerPowerupTypes.values()[ranInt], who);
 
 		return powerup;
 	}
 
-	private int ranX() {
-
-		// DO ZROBIENIA LEPSZE LOSOWANIE MIEJSCA
-
+	private int ranX() 
+	{
 		int min, max;
 		min = Board.WIDTH * 2 / 5;
 		max = Board.WIDTH * 3 / 5;
 		return Utility.randomInt(min, max);
 	}
 
-	private int ranY() {
-
-		// DO ZROBIENIA LEPSZE LOSOWANIE MIEJSCA
-
+	private int ranY()
+	{
 		int min, max;
 		min = Board.HEIGHT * 1 / 5;
 		max = Board.HEIGHT * 4 / 5;

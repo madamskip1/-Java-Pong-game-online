@@ -15,11 +15,19 @@ public class Player {
 	public Bumper bumper;
 	private Direction direction;
 	private int speed;
+	private boolean beer;
+	private int playerID;
 	
-	public Player(Bumper bump)  {
+	public Player(int id, Bumper bump)  {
+		playerID = id;
 		bumper = bump;
 		stop();
 		resetSpeed();
+	}
+	
+	public int getPlayerID()
+	{
+		return playerID;
 	}
 	
 	public void goUp() { direction = Direction.UP; }
@@ -36,6 +44,7 @@ public class Player {
 		direction = Direction.values()[dir];
 	}
 
+	public void setBeer(boolean set) { beer = set; }
 	
 	public void setSpeed(int _speed) { speed = _speed; }
 	
@@ -54,11 +63,22 @@ public class Player {
 	{
 		if (direction == Direction.NONE)
 			return;
+		Direction dir;
+		
+		if (beer)
+		{
+			if (direction == Direction.UP)
+				dir = Direction.DOWN;
+			else
+				dir = Direction.UP;
+		}
+		else
+			dir = direction;
 		
 		int dy = speed;
 		int y = bumper.getPosition().y;
 		
-		if (direction == Direction.UP)
+		if (dir == Direction.UP)
 		{
 			if ((y - dy) < 0)
 				dy = y;

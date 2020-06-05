@@ -1,5 +1,7 @@
 package powerup;
 
+import server.Effect;
+
 public class BallPowerup extends server.Powerup
 {
 	private server.Powerups.BallPowerupTypes ballType;
@@ -13,17 +15,31 @@ public class BallPowerup extends server.Powerup
 
 	public server.Effect hitBy(server.Balls balls, server.Ball ball)
 	{
+		server.Effect effect;
+		Effect.EffectsType type = null;
 		switch(ballType)
 		{
 		case MULTIPLE_SINGLE:
 			balls.multiple(ball);
-			break;
+			return null;
 		case MULTIPLE_ALL:
 			balls.multipleAll();
+			return null;
+		case FAST:
+			effect = new effects.BallSpeed();
+			type = Effect.EffectsType.FAST;
+			break;
+		case SLOW:
+			effect = new effects.BallSpeed();
+			type = Effect.EffectsType.SLOW;
 			break;
 		default:
+			return null;
 		}
 		
-		return null;
+		effect.setType(type);
+		effect.setBall(ball);
+		effect.For = server.Effect.EffectFor.BALL;
+		return effect;
 	}
 }

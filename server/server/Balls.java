@@ -71,26 +71,24 @@ public class Balls {
 			return true;
 	}
 
-	public void multiple(Ball ballToMultiple)// chyba git ale moze cos pomylilem z katami; sie sprawdzi potem
-	{
-		Vector2d vel = ballToMultiple.getVelocity();
-		double angle = Math.atan((double) vel.y / (double) vel.x);
-		double totalSpeed = Math.sqrt(vel.x * vel.x + vel.y + vel.y);
-
-		Ball newBall1 = ballToMultiple.clone();
-		Ball newBall2 = ballToMultiple.clone();
-		newBall1.setVelocity((int) (totalSpeed * Math.cos(angle + DISPERSION)),
-				(int) (totalSpeed * Math.sin(angle + DISPERSION)));
-		newBall2.setVelocity((int) (totalSpeed * Math.cos(angle - DISPERSION)),
-				(int) (totalSpeed * Math.sin(angle - DISPERSION)));
-		if(vel.x < 0) {
-			newBall1.getVelocity().negateX();
-			newBall2.getVelocity().negateX();
-		}
-		_balls.add(newBall1);
-		_balls.add(newBall2);
-
-	}
+	public void multiple(Ball ballToMultiple)
+    {
+        Vector2d vel = ballToMultiple.getVelocity();
+        double totalSpeed = Math.sqrt(vel.x * vel.x + vel.y * vel.y);
+        double angle = Math.atan2(vel.y, vel.x);
+        double angle1 = Math.toRadians(DISPERSION);
+       
+        Ball newBall1 = ballToMultiple.clone();
+        Ball newBall2 = ballToMultiple.clone();
+        newBall1.setVelocity((int) (totalSpeed * Math.cos(angle + angle1)),
+                (int) (totalSpeed * Math.sin(angle + angle1)));
+        newBall2.setVelocity((int) (totalSpeed * Math.cos(angle - angle1)),
+                (int) (totalSpeed * Math.sin(angle - angle1)));
+ 
+        _balls.add(newBall1);
+        _balls.add(newBall2);
+ 
+    }
 
 	public void multipleAll() {
 		int size = size();

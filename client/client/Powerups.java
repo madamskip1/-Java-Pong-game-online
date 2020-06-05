@@ -11,6 +11,8 @@ public class Powerups {
 	{
 		BALL_MULTIPLE_SINGLE,
 		BALL_MULTIPLE_ALL,
+		BALL_SLOW,
+		BALL_FAST,
 		ME_LONG,
 		ME_SMALL,
 		ME_SLOW,

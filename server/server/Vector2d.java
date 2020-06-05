@@ -23,6 +23,12 @@ public class Vector2d extends Point
 		this.y *= -1;
 	}
 	
+	public void multiply(float multiplyBy)
+	{
+		x = (int) (x * multiplyBy);
+		y = (int) (y * multiplyBy);
+	}
+	
 	public double length()
 	{
 		return Math.sqrt(this.x * this.x + this.y * this.y);
@@ -36,5 +42,11 @@ public class Vector2d extends Point
 	public void accelerate(int _d2x, int _d2y) {
 		x += _d2x;
 		y += _d2y;
+	}
+	
+	public Vector2d clone()
+	{
+		Vector2d vec = new Vector2d(x, y);
+		return vec;
 	}
 }
