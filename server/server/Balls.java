@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.Vector;
 
 public class Balls {
-	public final double DISPERSION = 25;
+	public final double DISPERSION = 25.0;
 	private Vector<Ball> _balls;
 
 	public Balls() {
@@ -49,7 +49,7 @@ public class Balls {
 		}
 	}
 
-	public void updateScore(int score[]) {// tu moze byc cos
+	public void updateScore(int score[]) {
 		for (Iterator<Ball> it = _balls.iterator(); it.hasNext();) {
 			Ball p = it.next();
 			if (p.addToScore(score)) {

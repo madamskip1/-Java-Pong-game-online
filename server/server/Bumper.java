@@ -67,8 +67,8 @@ public class Bumper {
 		Position.y = y;
 	}
 	
-	public void setLastSpeed(int _lastSpeed) {
-		lastSpeed = _lastSpeed;
+	public void setLastSpeed(int lS) {
+		lastSpeed = lS;
 	}
 	
 	public int getLastSpeed() {
