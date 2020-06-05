@@ -1,9 +1,10 @@
 package server;
 
+import java.util.Iterator;
 import java.util.Vector;
 
 public class Balls {
-	public final double DISPERSION = 30;
+	public final double DISPERSION = 25;
 	private Vector<Ball> _balls;
 
 	public Balls() {
@@ -48,10 +49,12 @@ public class Balls {
 		}
 	}
 
-	public void updateScore(int score[]) {
-		for (int i = 0; i < _balls.size(); i++) {
-			if (_balls.get(i).addToScore(score))
-				_balls.remove(i);
+	public void updateScore(int score[]) {// tu moze byc cos
+		for (Iterator<Ball> it = _balls.iterator(); it.hasNext();) {
+			Ball p = it.next();
+			if (p.addToScore(score)) {
+				it.remove();
+			}
 		}
 	}
 
@@ -67,26 +70,31 @@ public class Balls {
 		else
 			return true;
 	}
-	
-	public void multiple(Ball ballToMultiple)//chyba git ale moze cos pomylilem z katami; sie sprawdzi potem
+
+	public void multiple(Ball ballToMultiple)// chyba git ale moze cos pomylilem z katami; sie sprawdzi potem
 	{
 		Vector2d vel = ballToMultiple.getVelocity();
-		double angle = Math.atan((double)vel.y / (double)vel.x);
-		double totalSpeed = Math.sqrt(vel.x*vel.x + vel.y+vel.y);
-		
+		double angle = Math.atan((double) vel.y / (double) vel.x);
+		double totalSpeed = Math.sqrt(vel.x * vel.x + vel.y + vel.y);
+
 		Ball newBall1 = ballToMultiple.clone();
 		Ball newBall2 = ballToMultiple.clone();
-		newBall1.setVelocity((int)(totalSpeed*Math.cos(angle+DISPERSION)), (int)(totalSpeed*Math.sin(angle+DISPERSION)));
-		newBall2.setVelocity((int)(totalSpeed*Math.cos(angle-DISPERSION)), (int)(totalSpeed*Math.sin(angle-DISPERSION)));
+		newBall1.setVelocity((int) (totalSpeed * Math.cos(angle + DISPERSION)),
+				(int) (totalSpeed * Math.sin(angle + DISPERSION)));
+		newBall2.setVelocity((int) (totalSpeed * Math.cos(angle - DISPERSION)),
+				(int) (totalSpeed * Math.sin(angle - DISPERSION)));
+		if(vel.x < 0) {
+			newBall1.getVelocity().negateX();
+			newBall2.getVelocity().negateX();
+		}
 		_balls.add(newBall1);
 		_balls.add(newBall2);
-		
+
 	}
-	
-	public void multipleAll()
-	{
+
+	public void multipleAll() {
 		int size = size();
-		
+
 		for (int i = 0; i < size; i++)
 			multiple(_balls.get(i));
 	}

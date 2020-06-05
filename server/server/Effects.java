@@ -6,6 +6,10 @@ public class Effects {
 	private Vector<effects.PlayerEffect> PlayerEffects;
 	//private Vector<BallEffect> BallEffects;
 	
+	Effects(){
+		PlayerEffects = new Vector<effects.PlayerEffect>();
+	}
+	
 	
 	public void update(long deltaTime)
 	{

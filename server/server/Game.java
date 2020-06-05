@@ -23,13 +23,12 @@ public class Game {
 		Protocol = _prot;
 
 		Protocol.writeGameStateProtocol("INIT", "0");
+		Powerups = new Powerups();
+		Effects = new Effects();
 
 		setupPlayers();
 		setupFirstBall();
-		Powerups = new Powerups();
-		Effects = new Effects();
 		Powerups.setEffects(Effects);
-
 		Protocol.writeGameStateProtocol("INIT", "1");
 		State = States.INITIALIZED;
 
@@ -57,6 +56,8 @@ public class Game {
 		Protocol.writePlayerProtocol(1, "SIZE", Bumper.DEFAULT_WIDTH + "," + Bumper.DEFAULT_HEIGHT);
 
 		Protocol.setPlayers(players[0], players[1]);
+		Powerups.setupPlayers(players[0], players[1]);
+
 	}
 
 	public void setupFirstBall() {

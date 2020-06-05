@@ -45,12 +45,13 @@ public class PlayerPowerup extends server.Powerup
 	
 	private server.Player forPlayer(int index)
 	{
-		System.out.println(For == server.Powerups.PowerupFor.ME);
+		
 		
 		if (For == server.Powerups.PowerupFor.ME)
 			return Powerups.getPlayer(index);
 
-		return Powerups.getPlayer((index + 1) % 2);
+		return Powerups.getPlayer((index + 1)%2);
+//		return Powerups.players[((index + 1) % 2)];
 			
 	}
 	

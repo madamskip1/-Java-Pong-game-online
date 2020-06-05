@@ -35,7 +35,8 @@ public class Utility {
 			tempX = rect.x;
 		else if (circle.x > (rect.x + width))
 			tempX = rect.x  + width;
-
+		if (circle.x > rect.x && circle.x < rect.x+width)
+			tempX = circle.x;
 		
 		if (circle.y <= rect.y)
 			tempY = rect.y;

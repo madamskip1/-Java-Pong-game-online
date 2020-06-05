@@ -14,7 +14,7 @@ public class Ball {
 		position = new Point(0, 0);
 		velocity = new Vector2d(0, 0);
 		radius = DEFAULT_RADIUS;
-		touchByPlayer = -1;
+		touchByPlayer = 1;
 	}
 
 	public Ball clone() {
@@ -35,6 +35,7 @@ public class Ball {
 		max = boardHeight * 4 / 5;
 		int y = Utility.randomInt(min, max);
 		y=boardHeight/2;///////////////////////////////////////////////////
+		x=510;
 		_ball.setPosition(x, y);
 
 		x = Utility.randomInt(5, 100);
@@ -45,8 +46,8 @@ public class Ball {
 		if (Utility.randomInt(0, 100) <= 50)
 			y *= -1;
 
-		x=10;
-		y=0;
+		x=0;
+		y=10;
 		
 		
 		_ball.setVelocity(x, y);
@@ -107,7 +108,6 @@ public class Ball {
 	}
 
 	public boolean bumperCollision(Bumper b1, Bumper b2) {
-
 		if (velocity.x > 0) {
 			if (Utility.CircleRectangleCollision(position, radius, b2.getPosition(), b2.getWidth(), b2.getHeight())) {
 				velocity.negateX();
@@ -128,6 +128,8 @@ public class Ball {
 	}
 
 	public boolean powerupCollisionCheck(Powerup pp) {
+		if(touchByPlayer == -1)
+			return false;
 		return Utility.CircleRectangleCollision(position, radius, pp.getPosition(), pp.getSize(), pp.getSize());
 	
 	}
