@@ -20,7 +20,7 @@ public class Powerup {
 		
 
 	public void draw(Graphics2D g) {
-		BufferedImage img = il.getImage(0);
+		BufferedImage img = il.getImage(type);
 		RoundRectangle2D rr = new RoundRectangle2D.Double(this.pos.x, this.pos.y, 50, 50, 15, 15);
 		g.setClip(rr);
 		g.drawImage(img, this.pos.x, this.pos.y, null);

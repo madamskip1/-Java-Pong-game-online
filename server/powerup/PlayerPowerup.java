@@ -2,26 +2,25 @@ package powerup;
 
 public class PlayerPowerup extends server.Powerup {
 	private server.Powerups.PlayerPowerupTypes playerType;
-	public PlayerPowerup(int x, int y, server.Powerups.PlayerPowerupTypes _playerType, server.Powerups.PowerupFor _For) {
+
+	public PlayerPowerup(int x, int y, server.Powerups.PlayerPowerupTypes _playerType,
+			server.Powerups.PowerupFor _For) {
 		super(x, y);
 		playerType = _playerType;
 		For = _For;
-		
-		
+
 		int typeNr = 0;
 		typeNr += server.Powerups.BallPowerupTypes.values().length;
-		
+
 		if (For == server.Powerups.PowerupFor.OPPONENT)
 			typeNr += server.Powerups.PlayerPowerupTypes.values().length;
-		
+
 		typeNr += _playerType.ordinal();
-		
+
 		Type = server.Powerups.intToType(typeNr);
 	}
 
-	
-	public server.Effect hitBy(server.Balls balls, server.Ball ball)
-	{
+	public server.Effect hitBy(server.Balls balls, server.Ball ball) {
 		server.Player player = forPlayer(ball.touchBy());
 
 		switch (playerType) {
@@ -40,11 +39,9 @@ public class PlayerPowerup extends server.Powerup {
 		}
 
 	}
-	
-	private server.Player forPlayer(int index)
-	{
-		
-		
+
+	private server.Player forPlayer(int index) {
+
 		if (For == server.Powerups.PowerupFor.ME)
 			return server.Powerups.getPlayer(index);
 
@@ -83,10 +80,8 @@ public class PlayerPowerup extends server.Powerup {
 		effect.For = server.Effect.EffectFor.PLAYER;
 		return effect;
 	}
-	
-	
-	private void setType()
-	{
-		
+
+	private void setType() {
+
 	}
 }

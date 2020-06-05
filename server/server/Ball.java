@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Ball {
 	public static final int DEFAULT_RADIUS = 15;
-	public static final double FRICTION = 5;
+	public static final double FRICTION = 0.5;
 	private Point position;
 	private Vector2d velocity;
 	private int radius;
@@ -34,8 +34,6 @@ public class Ball {
 		min = boardHeight * 1 / 5;
 		max = boardHeight * 4 / 5;
 		int y = Utility.randomInt(min, max);
-		y=boardHeight/2;///////////////////////////////////////////////////
-		x=510;
 		_ball.setPosition(x, y);
 
 		x = Utility.randomInt(5, 100);
@@ -46,8 +44,8 @@ public class Ball {
 		if (Utility.randomInt(0, 100) <= 50)
 			y *= -1;
 
-		x=0;
-		y=10;
+		x=3;
+		y=0;
 		
 		
 		_ball.setVelocity(x, y);
