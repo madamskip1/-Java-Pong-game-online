@@ -18,12 +18,16 @@ public class Board extends JPanel {
 	public static final Color LINE_COLOR = new Color(207, 224, 252);
 	public static final int X_PADDING = 10;
 
+	private final int OFFSET = 100;
+	private final int SPACE_W_OFFSET = 170;	
+	private final int TXT_OFFSET_Y = 15;
 	private final Color textColor = Color.WHITE;
 	private final String waitingMsg = "Waiting for another player";
-	private final String leftWon = "Left player has won!";
-	private final String rightWon = "Right player has won!";
-	private final String waitAccept = "Click space to start";
-	private final String acceptedMsg = "Waiting for another player's accept.";
+	private final String Win = "You have won!";
+	private final String Loss = "You have lost!";
+	private final String Draw = "DRAW!";
+	private final String waitAccept = "Press space to start";
+	private final String acceptedMsg = "Waiting for another player to accept.";
 
 	private Balls balls;
 	private Bumper Bumpers[];
@@ -56,33 +60,32 @@ public class Board extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
+//		System.out.println(Game.State);
 
 		if (!(Game.State == Game.States.RUNNING)) {
 			g2d.setColor(Color.BLACK);
 			g2d.fillRect(0, 0, WIDTH, HEIGHT);
 			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 			Font font = new Font("Skia", Font.PLAIN, 20);
-			
 
 			g2d.setFont(font);
 			g2d.setColor(textColor);
-			
-			if (Game.State == Game.States.INIT)
-				g2d.drawString(waitingMsg, WIDTH / 2, HEIGHT / 2);
-			else if (Game.State == Game.States.GAMEOVER) {
-				if (Game.Scores[0].getScore() > Game.Scores[1].getScore())
-					g2d.drawString(leftWon, WIDTH / 2, HEIGHT / 2);
-				else 
-					g2d.drawString(rightWon, WIDTH / 2, HEIGHT / 2);
-				
-			} else if (Game.State == Game.States.ACCEPTED)
-				g2d.drawString(acceptedMsg, WIDTH / 2, HEIGHT / 2);
-			else if (Game.State == Game.States.INITIALIZED)
-				g2d.drawString(waitAccept, WIDTH / 2, HEIGHT / 2);
 
-		}
-		else
-		{
+			if (Game.State == Game.States.INIT)
+				g2d.drawString(waitingMsg, WIDTH / 2 - OFFSET, HEIGHT / 2 - TXT_OFFSET_Y);
+			else if (Game.State == Game.States.ACCEPTED)
+				g2d.drawString(acceptedMsg, WIDTH / 2 - SPACE_W_OFFSET, HEIGHT / 2- TXT_OFFSET_Y);
+			else if (Game.State == Game.States.INITIALIZED)
+				g2d.drawString(waitAccept, WIDTH / 2 - OFFSET, HEIGHT / 2- TXT_OFFSET_Y);
+
+			else if (Game.State == Game.States.WIN)
+				g2d.drawString(Win, WIDTH / 2 - OFFSET, HEIGHT / 2);
+			else if (Game.State == Game.States.LOSS)
+				g2d.drawString(Loss, WIDTH / 2 - OFFSET, HEIGHT / 2);
+			else if (Game.State == Game.States.DRAW)
+				g2d.drawString(Draw, WIDTH / 2 - OFFSET, HEIGHT / 2);
+
+		} else {
 			g2d.setColor(LINE_COLOR);
 			g2d.fillRect(WIDTH / 2 - 1, 0, 2, HEIGHT);
 
@@ -92,7 +95,7 @@ public class Board extends JPanel {
 			Powerups.draw(g2d);
 
 		}
-	
+
 	}
 
 	@Override

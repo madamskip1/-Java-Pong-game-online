@@ -18,8 +18,8 @@ public class Powerups {
 	public enum PowerupTypes {
 		BALL_MULTIPLE_SINGLE,
 		BALL_MULTIPLE_ALL,
-		BALL_SLOW,
 		BALL_FAST,
+		BALL_SLOW,
 		ME_LONG,
 		ME_SMALL,
 		ME_SLOW,

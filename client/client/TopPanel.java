@@ -22,9 +22,9 @@ public class TopPanel extends JPanel {
 
 	public TopPanel(Score score1, Score score2, Keyboard keyB) {
 		super();
-		this.p1ScoreX = WIDTH / 4;
+		this.p1ScoreX = WIDTH / 4 - 40 ;
 		this.p1ScoreY = HEIGHT / 2 + 2;
-		this.p2ScoreX = WIDTH * 3 / 4;
+		this.p2ScoreX = WIDTH * 3 / 4 - 40;
 		this.p2ScoreY = HEIGHT / 2 + 2;
 		setBackground(PANEL_COLOR);
 		setPreferredSize(getPreferredSize());
@@ -43,10 +43,12 @@ public class TopPanel extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
-
+		
+		if(Game.State == Game.States.RUNNING || Game.State == Game.States.WIN ||
+				Game.State == Game.States.LOSS || Game.State == Game.States.DRAW){
 		s1.drawScore(g2d);
 		s2.drawScore(g2d);
-
+		}
 	}
 	
 	public void setScores(int p1, int p2) {

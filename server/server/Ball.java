@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Ball {
 	public static final int DEFAULT_RADIUS = 15;
-	public static final double FRICTION = 0.5;
+	public static final double FRICTION = 0.025;
 	private Point position;
 	private Vector2d velocity;
 	private int radius;
@@ -28,19 +28,18 @@ public class Ball {
 
 	public static Ball generateBall(int boardWidth, int boardHeight) {
 		Ball _ball = new Ball();
-//		int min, max;
-//		min = boardWidth * 2 / 5;
-//		max = boardWidth * 3 / 5;
-//		int x = Utility.randomInt(min, max);
-//		min = boardHeight * 1 / 5;
-//		max = boardHeight * 4 / 5;
-//		int y = Utility.randomInt(min, max);
 		int y = boardHeight / 2;
 		int x = boardWidth / 2;
 		_ball.setPosition(x, y);
 
-		x = Utility.randomInt(-5, 5);
-		y = Utility.randomInt(-5, 5);
+		x = Utility.randomInt(2, 8);
+		y = Utility.randomInt(2, 8);
+
+		if (Utility.randomInt(0, 1) == 1)
+			x *= -1;
+
+		if (Utility.randomInt(0, 1) == 1)
+			y *= -1;
 
 		_ball.setVelocity(x, y);
 		_ball.correctSpeed();
@@ -72,7 +71,8 @@ public class Ball {
 
 	public void correctSpeed() {
 		if (velocity.x == 0) {
-			velocity.x = Utility.randomInt(-2, 2);
+			velocity.x = Utility.randomInt(-2, 3);
+			--velocity.x;
 		}
 	}
 
@@ -168,15 +168,19 @@ public class Ball {
 	private void spin(Bumper b) {
 		if (b.getLastSpeed() < 0) {// board goes up
 			if (velocity.y < 0)
-				velocity.accelerate(0, (int) (-1 * FRICTION * b.getLastSpeed()));
+				velocity.accelerate(1, (int) (-1 * FRICTION * b.getLastSpeed()));
 			else
-				velocity.accelerate(0, (int) (FRICTION * b.getLastSpeed()));
+				velocity.accelerate(1, (int) (FRICTION * b.getLastSpeed()));
 		} else {// board goes down
 			if (velocity.y < 0)
-				velocity.accelerate(0, (int) (-1 * FRICTION * b.getLastSpeed()));
+				velocity.accelerate(1, (int) (-1 * FRICTION * b.getLastSpeed()));
 			else
-				velocity.accelerate(0, (int) (FRICTION * b.getLastSpeed()));
+				velocity.accelerate(1, (int) (FRICTION * b.getLastSpeed()));
 		}
+		if (velocity.x < 0)
+			velocity.accelerate(-1, 0);
+		else
+			velocity.accelerate(1, 0);
 	}
 
 }

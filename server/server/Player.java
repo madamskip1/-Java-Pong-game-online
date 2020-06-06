@@ -1,7 +1,7 @@
 package server;
 
 public class Player {
-	public static final int DEFAULT_SPEED = 2;
+	public static final int DEFAULT_SPEED = 12;
 	
 	public static enum Direction
 	{

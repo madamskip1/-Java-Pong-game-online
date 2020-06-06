@@ -8,6 +8,7 @@ public class Game {
 	public enum States {
 		INIT, INITIALIZED, RUNNING, GAMEOVER,
 		ACCEPTED
+
 	}
 
 	public static final int PLAYERS = 2;
@@ -111,13 +112,15 @@ public class Game {
 	}
 
 	public void gameOver() {
+		System.out.println(State);
+
 		Protocol.writeGameStateProtocol("OVER", Integer.toString(winner));
 		State = Game.States.INITIALIZED;
 		Accepted[0] = Accepted[1] = false;
 		initalized();
 	}
 	
-	public checkEnd()
+	public void checkEnd()
 	{
 		if (score[0] >= MAX_SCORE)
 		{
@@ -126,6 +129,7 @@ public class Game {
 				winner = 2;
 			
 			State = Game.States.GAMEOVER;
+			reset();
 		}
 		else if (score[1] >= MAX_SCORE)
 		{
@@ -134,8 +138,21 @@ public class Game {
 				winner = 2;
 			
 			State = Game.States.GAMEOVER;
+			reset();
 		}
-		
+	}
+	
+	public void reset() {
+		Powerups = new Powerups();
+		Effects = new Effects();
+		setupPlayers();
+		setupFirstBall();
+		Powerups.setEffects(Effects);
+		Accepted = new boolean[2];
+		Accepted[0] = Accepted[1] = false;
+		score[0] = 0;
+		score[1] = 0;
+		State = Game.States.INIT;
 	}
 
 	private void update(long deltaTime) {

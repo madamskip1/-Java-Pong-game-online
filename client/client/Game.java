@@ -15,23 +15,14 @@ public class Game {
 	private Powerups Powerups;
 	protected static Score Scores[];
 	private int FPS = 60;
-	
-	public enum States
-	{
-		BEFORE_INIT,
-		INIT,
-		ACCEPTED,
-		INITIALIZED,
-		RUNNING,
-		LOSS,
-		WIN,
-		DRAW
+
+	public enum States {
+		BEFORE_INIT, INIT, ACCEPTED, INITIALIZED, RUNNING, GAMEOVER, LOSS, WIN, DRAW
 	}
-	
+
 	protected static States State;
-	
-	public Game()
-	{
+
+	public Game() {
 		State = States.BEFORE_INIT;
 		Players = new Player[2];
 		Players[0] = new Player();
@@ -39,69 +30,52 @@ public class Game {
 		Balls = new Balls();
 		Powerups = new Powerups();
 	}
-	
-	public void setProtocol(ClientProtocol _prot)
-	{
+
+	public void setProtocol(ClientProtocol _prot) {
 		Protocol = _prot;
 	}
-	
-	
-	public void setYou(int num)
-	{
+
+	public void setYou(int num) {
 		you = num;
 		opponent = (num + 1) % 2;
 	}
-	
-	public void Balls(int numOfBalls, String ballsString)
-	{
+
+	public void Balls(int numOfBalls, String ballsString) {
 		Vector<Ball> newBalls = client.Balls.deserialize(ballsString);
-		
+
 		Balls.setBalls(newBalls);
 	}
-	
-	public void Powerups(int numOfPowerups, String powerupsString)
-	{
+
+	public void Powerups(int numOfPowerups, String powerupsString) {
 		Vector<Powerup> newPowers = client.Powerups.deserialize(powerupsString);
-		
+
 		Powerups.setPowerups(newPowers);
 	}
-	
-	public void PlayerPos(int player, int x, int y)
-	{
+
+	public void PlayerPos(int player, int x, int y) {
 		Players[player].setPosition(x, y);
 	}
-	
-	public void PlayerSize(int player, int width, int height)
-	{
-		Players[player].setSize(width,  height);
-	}
-	
-	
-	public void init()
-	{
-		
-		// Tutaj rysujesz pocz¹tek:
-		//  * ogólnie okno
-		//  * ¯e oczekujesz na gracz    -> DO ZROBIENIA
 
-		
+	public void PlayerSize(int player, int width, int height) {
+		Players[player].setSize(width, height);
+	}
+
+	public void init() {
+
 		State = States.INIT;
-		
+
 		Keyboard = new Keyboard(this);
 		Window = new Window(Keyboard);
 		Scores = new Score[2];
-		
-		if (you == 0)
-		{
-			Scores[0] = new Score("Ty");
-			Scores[1] = new Score("Przeciwinik");
+
+		if (you == 0) {
+			Scores[0] = new Score("You");
+			Scores[1] = new Score("Opponent");
+		} else {
+			Scores[1] = new Score("You");
+			Scores[0] = new Score("Opponent");
 		}
-		else
-		{
-			Scores[1] = new Score("Ty");
-			Scores[0] = new Score("Przeciwinik");
-		}
-		
+
 		TopPanel = new TopPanel(Scores[0], Scores[1], Keyboard);
 		Board = new Board(Keyboard);
 		Board.setBalls(Balls);
@@ -110,78 +84,67 @@ public class Game {
 		Board.setPowerups(Powerups);
 		Window.setBoard(Board);
 		Window.setTopPanel(TopPanel);
-		
+
 		Window.createAndShowGUI();
 		Board.repaint();
 	}
-	
-	public void initialized()
-	{
+
+	public void initialized() {
 		State = States.INITIALIZED;
 		Board.repaint();
 	}
-	
-	
-	public void start()
-	{
+
+	public void start() {
 		State = States.RUNNING;
-	
-		Thread loop = new Thread()
-				{
-					public void run()
-					{
-						gameLoop();
-					}
-				};
-		
+
+		Thread loop = new Thread() {
+			public void run() {
+				gameLoop();
+			}
+		};
+
 		loop.start();
 	}
-	
-	public void over(int winner)
-	{
+
+	public void over(int winner) {
 		if (winner == you)
 			State = Game.States.WIN;
 		else if (winner == opponent)
 			State = Game.States.LOSS;
-		else 
+		else
 			State = Game.States.DRAW;
-		
+
 		// Zatrzymanie pêtli
 		// Wyœwietlenie przegrana/wygrana zale¿nie, który klient
-		
+
 		Board.repaint();
 	}
-	
-	private void gameLoop()
-	{
-		long timeBetweenUpdates = 1000000000  / FPS;
+
+	private void gameLoop() {
+		long timeBetweenUpdates = 1000000000 / FPS;
 		long lastTime = System.nanoTime();
 		long now;
 		long update;
 		long delta;
-		
-		while (State == States.RUNNING)
-		{
+
+		while (State == States.RUNNING) {
 			// Pêtla do poprawienia
 			now = System.nanoTime();
 			update = now - lastTime;
 			lastTime = now;
 			delta = (long) (update / ((double) timeBetweenUpdates));
-			
-			// update(delta)   - to wykorzystamy do zmniejszenia efektu wizualnego laga
-			
+
+			// update(delta) - to wykorzystamy do zmniejszenia efektu wizualnego laga
+
 			Board.repaint();
 			TopPanel.repaint();
-			
+
 		}
-		
+
 	}
-	
-	
-	public void keyPressed(int code)
-	{
-		switch(code)
-		{
+
+	public void keyPressed(int code) {
+		switch (code) {
 		case 38:
 		case 87:
 			Protocol.writePlayerProtocol("DIR", "UP");
@@ -192,11 +155,9 @@ public class Game {
 			break;
 		}
 	}
-	
-	public void keyReleased(int code)
-	{
-		switch(code)
-		{
+
+	public void keyReleased(int code) {
+		switch (code) {
 		case 38:
 		case 87:
 		case 40:
@@ -208,24 +169,20 @@ public class Game {
 			break;
 		}
 	}
-	
-	public void accept()
-	{
-		if (State != Game.States.RUNNING || State != Game.States.BEFORE_INIT || State != Game.States.INIT)
-		{
+
+	public void accept() {
+		if (State != Game.States.RUNNING || State != Game.States.BEFORE_INIT || State != Game.States.INIT) {
 			State = Game.States.ACCEPTED;
 			Board.repaint();
 			Protocol.writeAcceptProtocol();
 		}
 	}
 
-	
 	public void zeroBalls() {
 		Balls.clearBalls();
 	}
-	
-	public void zeroPowerups()
-	{
+
+	public void zeroPowerups() {
 		Powerups.clearPowerups();
 	}
 }

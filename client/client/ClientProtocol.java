@@ -34,10 +34,10 @@ public class ClientProtocol {
 			else if (obj.equals("STATE"))
 				readStateProtocol(settings, mainMsg);
 
-			else if(obj.equals("POWERUP"))
+			else if (obj.equals("POWERUP"))
 				readPowerupProtocol(settings, mainMsg);
-						
-			else if(obj.equals("SCORE"))
+
+			else if (obj.equals("SCORE"))
 				readScoreProtocol(settings, mainMsg);
 
 		}
@@ -78,7 +78,7 @@ public class ClientProtocol {
 				game.zeroBalls(); // inaczej nie znikna
 		}
 	}
-	
+
 	private void readPowerupProtocol(String settings, String mainMsg) {
 		if (settings.equals("POSITION")) {
 			Matcher match = twoPattern.matcher(mainMsg);
@@ -88,27 +88,25 @@ public class ClientProtocol {
 				game.zeroPowerups(); // inaczej nie znikna
 		}
 	}
-	
+
 	private void readStateProtocol(String settings, String mainMsg) {
 		if (settings.equals("INIT")) {
-
 		} else if (settings.equals("START"))
 			game.start();
-		else if (settings.equals("OVER");
+		else if (settings.equals("OVER"))
 			game.over(Integer.parseInt(mainMsg));
 	}
-	
+
 	private void readScoreProtocol(String settings, String mainMsg) {
 		if (settings.equals("SET")) {
 			String[] split = mainMsg.split(",");
-			int sc[] = {Integer.parseInt(split[0]),Integer.parseInt(split[1])};
+			int sc[] = { Integer.parseInt(split[0]), Integer.parseInt(split[1]) };
 			Game.Scores[0].setScore(sc[0]);
 			Game.Scores[1].setScore(sc[1]);
 
 		}
-		
-	}
 
+	}
 
 	public void writePlayerProtocol(String settings, String mainMsg) {
 		try {
@@ -117,9 +115,8 @@ public class ClientProtocol {
 			e.printStackTrace();
 		}
 	}
-	
-	public void writeAcceptProtocol()
-	{
+
+	public void writeAcceptProtocol() {
 		try {
 			write("ACCEPT;1;1");
 		} catch (IOException e) {
