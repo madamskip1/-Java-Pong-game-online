@@ -164,6 +164,7 @@ public class Game {
 			
 			Board.repaint();
 			TopPanel.repaint();
+			
 		}
 		
 	}
