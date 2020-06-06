@@ -24,17 +24,22 @@ public class PongClientHandler implements Runnable {
 		String received;
 		while(true)
 		{
+			received = "";
 			try
 			{
 				received = InputStream.readUTF();
-				Protocol.read(PlayerID, received);
 			}
 			catch (IOException e)
 			{
-				System.out.println("DUPA>ZEPSUTE");
-				e.printStackTrace();
-				break;
+				if (!(e instanceof SocketTimeoutException))
+				{
+					System.out.println("DUPA>ZEPSUTE");
+					e.printStackTrace();
+					break;
+				} 
+					
 			}
+			Protocol.read(PlayerID, received);
 		}
 		try
 		{
@@ -44,7 +49,9 @@ public class PongClientHandler implements Runnable {
 		}
 		catch (IOException e)
 		{
+			System.out.println("ROZLACZONO");
 			e.printStackTrace();
 		}
+		System.out.println("ROZLACZONO");
 	}
 }

@@ -1,5 +1,7 @@
 package server;
 
+import java.util.concurrent.TimeUnit;
+
 import client.Game.States;
 
 public class Game {
@@ -11,12 +13,12 @@ public class Game {
 	public static final int PLAYERS = 2;
 	private Player players[];
 	private Bumper playersBumpers[];
-	public boolean Accepted[];
 	private ServerProtocol Protocol;
 	private Balls Balls;
 	private Powerups Powerups;
 	private Effects Effects;
 	private States State;
+	public boolean Accepted[];
 	private int FPS = 60;
 	private int score[] = {0,0};
 
@@ -31,11 +33,11 @@ public class Game {
 		setupPlayers();
 		setupFirstBall();
 		Powerups.setEffects(Effects);
-		Protocol.writeGameStateProtocol("INIT", "1");
 		Accepted = new boolean[2];
 		Accepted[0] = Accepted[1] = false;
-		State = States.INITIALIZED;
 		
+		Protocol.writeGameStateProtocol("INIT", "1");
+		State = States.INITIALIZED;
 	}
 
 	public void setupPlayers() {
@@ -71,20 +73,27 @@ public class Game {
 
 	public void checkAccepted()
 	{
-		
-		if (Accepted[0] && Accepted[1])
-		{
+		if (Accepted[0] == true && Accepted[1] == true)
 			State = States.ACCEPTED;
-		}
 	}
 	
 	public void initalized()
 	{
 		while (State == States.INITIALIZED)
+		{
+			try {
+				TimeUnit.SECONDS.sleep(1);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			checkAccepted();
-		
+		}
 		start();
 	}
+
+	
 	
 	public Player[] getPlayers() {
 		return players;

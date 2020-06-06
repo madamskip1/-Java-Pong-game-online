@@ -28,15 +28,18 @@ public class ServerProtocol {
 
 	public void read(int PlayerID, String msg) {
 		Matcher match = mainPattern.matcher(msg);
-		match.matches();
-		String obj = match.group(1);
-		String settings = match.group(2);
-		String mainMsg = match.group(3);
+		if(match.matches())
+		{
+			String obj = match.group(1);
+			String settings = match.group(2);
+			String mainMsg = match.group(3);
+	
+			if (obj.equals("PLAYER"))
+				readPlayerProtocol(PlayerID, settings, mainMsg);
+			else if(obj.equals("ACCEPT"))
+				readAcceptProtocol(PlayerID);
 
-		if (obj.equals("PLAYER"))
-			readPlayerProtocol(PlayerID, settings, mainMsg);
-		else if(obj.equals("ACCEPT"))
-			readAcceptProtocol(PlayerID);
+		}
 	}
 
 	private void write(String msg) throws IOException {
@@ -103,4 +106,6 @@ public class ServerProtocol {
 	{
 		Game.Accepted[playerID] = true;
 	}
+
+	
 }

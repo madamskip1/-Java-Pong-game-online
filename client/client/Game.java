@@ -20,8 +20,8 @@ public class Game {
 	{
 		BEFORE_INIT,
 		INIT,
-		INITIALIZED,
 		ACCEPTED,
+		INITIALIZED,
 		RUNNING,
 		GAMEOVER
 	}
@@ -36,7 +36,6 @@ public class Game {
 		Players[1] = new Player();
 		Balls = new Balls();
 		Powerups = new Powerups();
-		//init();
 	}
 	
 	public void setProtocol(ClientProtocol _prot)
@@ -117,10 +116,9 @@ public class Game {
 	public void initialized()
 	{
 		State = States.INITIALIZED;
-		// Tutaj rysujesz po do³¹czeniu drugiego gracza:
-		//  * ¯e czekasz na akceptacjê (to dopiero dodamy, póki co startuje automatycznie)
 		Board.repaint();
 	}
+	
 	
 	public void start()
 	{
@@ -173,7 +171,6 @@ public class Game {
 	
 	public void keyPressed(int code)
 	{
-		System.out.println(code);
 		switch(code)
 		{
 		case 38:
@@ -183,9 +180,6 @@ public class Game {
 		case 40:
 		case 83:
 			Protocol.writePlayerProtocol("DIR", "DOWN");
-			break;
-		case 32:
-			accept();
 			break;
 		}
 	}
@@ -200,6 +194,9 @@ public class Game {
 		case 83:
 			Protocol.writePlayerProtocol("DIR", "NONE");
 			break;
+		case 32:
+			accept();
+			break;
 		}
 	}
 	
@@ -212,6 +209,7 @@ public class Game {
 			Protocol.writeAcceptProtocol();
 		}
 	}
+
 	
 	public void zeroBalls() {
 		Balls.clearBalls();

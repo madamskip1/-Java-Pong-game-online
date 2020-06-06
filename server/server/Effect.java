@@ -33,7 +33,6 @@ public class Effect
 		timeToExpire -= (double) time / 1000000000;
 		if (timeToExpire <= 0)
 		{
-			System.out.println("Expire " + type + ", " + For);
 			expire();
 			return true;
 		}

@@ -40,6 +40,7 @@ public class ClientProtocol {
 	}
 
 	private void write(String msg) throws IOException {
+		Output.flush();
 		Output.writeUTF(msg);
 	}
 

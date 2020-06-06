@@ -63,7 +63,6 @@ public class Powerups {
 	public void setupPlayers(Player _player1, Player _player2) {
 		players[0] = _player1;
 		players[1] = _player2;
-		System.out.println(players.length);
 	}
 
 	public static Player getPlayer(int index) {
@@ -94,7 +93,7 @@ public class Powerups {
 
 	public void powerupHit(Powerup powerup, Balls balls, Ball ball) {
 		Effect effect = powerup.hitBy(balls, ball);
-		powerup.print();
+
 		if (effect != null)
 			Effects.add(effect);
 	}

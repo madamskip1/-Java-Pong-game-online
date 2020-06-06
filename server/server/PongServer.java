@@ -31,6 +31,7 @@ public class PongServer {
 			Socket _s = null;
 			
 			_s = Socket.accept();
+			_s.setSoTimeout(1000);
 			
 			if (player1 == null)
 			{
@@ -57,6 +58,7 @@ public class PongServer {
 		protocol.setGame(Game);
 		
 		Game.initalized();
+		
 		// Zrobiæ koñczenie po³¹czenia
 	}
 	
