@@ -61,8 +61,10 @@ public class Player {
 	
 	public void update()
 	{
-		if (direction == Direction.NONE)
+		if (direction == Direction.NONE) {
+			bumper.move(0);
 			return;
+		}
 		Direction dir;
 		
 		if (beer)
@@ -89,8 +91,7 @@ public class Player {
 			dy = Board.HEIGHT - y - bumper.getHeight();
 		
 		
-		if (dy == 0)
-			return;
+
 		
 		bumper.move(dy);
 	}

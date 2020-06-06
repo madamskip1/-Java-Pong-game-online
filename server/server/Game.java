@@ -70,6 +70,7 @@ public class Game {
 		Balls.addBall(Ball.generateBall(server.Board.WIDTH, server.Board.HEIGHT));
 		Protocol.writeBallProtocol(("POSITION;" + Balls.size()), Balls.serialize());
 	}
+	
 
 	public void checkAccepted()
 	{
@@ -119,9 +120,10 @@ public class Game {
 
 		Powerups.ballsCollisions(Balls);
 		Balls.bumperCollisions(playersBumpers[0], playersBumpers[1]);
-		Balls.updateScore(score);
 		Effects.update(deltaTime);
 		Powerups.trySpawn(deltaTime);
+		Balls.addIfZero();
+		Balls.updateScore(score);
 		// Check collision
 		// Check gameEnd
 	}
@@ -133,6 +135,7 @@ public class Game {
 		pos = players[1].getPosition();
 		Protocol.writePlayerProtocol(1, "MOVE", pos.x + "," + pos.y);
 		Protocol.writePowerUpProtocol(("POSITION;" + Powerups.size()), Powerups.serialize());
+		Protocol.writeScoreProtocol("SET", score[0] + "," + score[1]);
 	}
 
 	private void gameLoop() {

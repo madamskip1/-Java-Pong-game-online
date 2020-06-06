@@ -162,10 +162,7 @@ public class Powerups {
 		int ranInt = Utility.randomInt(0, BallPowerupTypes.values().length - 1);
 		int x = ranX();
 		int y = ranY();
-		
-		x = 500;
-		y = 0;/////////////
-		
+
 		Powerup powerup = new powerup.BallPowerup(x, y, BallPowerupTypes.values()[ranInt]);
 		return powerup;
 	}
@@ -175,10 +172,7 @@ public class Powerups {
 
 		int x = ranX();
 		int y = ranY();
-		
-		x = 500;
-		y = 0;////////////////
-		
+
 		Powerup powerup = new powerup.PlayerPowerup(x, y, PlayerPowerupTypes.values()[ranInt], who);
 
 		return powerup;

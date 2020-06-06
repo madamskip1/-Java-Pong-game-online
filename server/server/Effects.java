@@ -17,18 +17,25 @@ public class Effects {
 	{
 		int size;
 		size = PlayerEffects.size();
-		for (int i = 0; i < size; i++)
+		for (Iterator<effects.PlayerEffect> pe = PlayerEffects.iterator(); pe.hasNext();)
 		{
-			if (PlayerEffects.get(i).update(deltaTime))
-				PlayerEffects.remove(PlayerEffects.get(i));
+			effects.PlayerEffect e = pe.next();
+			if (e.update(deltaTime))
+				pe.remove();
 		}
 	
-		size = BallEffects.size();
-		for (int i = 0; i < size; i++)
+		for (Iterator<effects.BallEffect> be = BallEffects.iterator(); be.hasNext();)
 		{
-			if (BallEffects.get(i).update(deltaTime))
-				BallEffects.remove(BallEffects.get(i));
+			effects.BallEffect e = be.next();
+			if (e.update(deltaTime))
+				be.remove();
 		}
+//		size = BallEffects.size();
+//		for (int i = 0; i < size; i++)
+//		{
+//			if (BallEffects.get(i).update(deltaTime))
+//				BallEffects.remove(BallEffects.get(i));
+//		}
 	}
 	
 	

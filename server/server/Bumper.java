@@ -19,6 +19,7 @@ public class Bumper {
 
 	public void move(int dy) {
 		Position.add(0, dy);
+		lastSpeed = dy;
 	}
 
 	public void setHeight(int _height) {

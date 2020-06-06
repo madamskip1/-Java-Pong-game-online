@@ -85,6 +85,9 @@ public class Balls {
         newBall2.setVelocity((int) (totalSpeed * Math.cos(angle - angle1)),
                 (int) (totalSpeed * Math.sin(angle - angle1)));
  
+        newBall1.correctSpeed();
+        newBall2.correctSpeed();
+        	
         _balls.add(newBall1);
         _balls.add(newBall2);
  
@@ -96,4 +99,13 @@ public class Balls {
 		for (int i = 0; i < size; i++)
 			multiple(_balls.get(i));
 	}
+	
+	public void addIfZero() {
+		if(_balls.size() == 0) {
+			Ball b = Ball.generateBall(Board.WIDTH, Board.HEIGHT);
+			_balls.add(b);
+		}
+			
+	}
+	
 }
