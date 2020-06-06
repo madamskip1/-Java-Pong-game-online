@@ -23,7 +23,9 @@ public class Game {
 		ACCEPTED,
 		INITIALIZED,
 		RUNNING,
-		GAMEOVER
+		LOSS,
+		WIN,
+		DRAW
 	}
 	
 	protected static States State;
@@ -135,13 +137,19 @@ public class Game {
 		loop.start();
 	}
 	
-	public void gameOver(int winner)
+	public void over(int winner)
 	{
-		State = States.GAMEOVER;
+		if (winner == you)
+			State = Game.States.WIN;
+		else if (winner == opponent)
+			State = Game.States.LOSS;
+		else 
+			State = Game.States.DRAW;
 		
 		// Zatrzymanie pêtli
 		// Wyœwietlenie przegrana/wygrana zale¿nie, który klient
 		
+		Board.repaint();
 	}
 	
 	private void gameLoop()
@@ -203,7 +211,7 @@ public class Game {
 	
 	public void accept()
 	{
-		if (State == Game.States.INITIALIZED || State == Game.States.ACCEPTED)
+		if (State != Game.States.RUNNING || State != Game.States.BEFORE_INIT || State != Game.States.INIT)
 		{
 			State = Game.States.ACCEPTED;
 			Board.repaint();

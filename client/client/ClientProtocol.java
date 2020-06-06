@@ -94,7 +94,8 @@ public class ClientProtocol {
 
 		} else if (settings.equals("START"))
 			game.start();
-
+		else if (settings.equals("OVER");
+			game.over(Integer.parseInt(mainMsg));
 	}
 	
 	private void readScoreProtocol(String settings, String mainMsg) {

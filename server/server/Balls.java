@@ -6,7 +6,7 @@ import java.util.Vector;
 public class Balls {
 	public final double DISPERSION = 25;
 	private Vector<Ball> _balls;
-
+	private Game game;
 	public Balls() {
 		_balls = new Vector<Ball>();
 	}
@@ -21,6 +21,8 @@ public class Balls {
 
 		return ret;
 	}
+	
+	public void setGame(Game _game) { game = _game; }
 
 	public Ball getBall(int index) {
 		return _balls.elementAt(index);

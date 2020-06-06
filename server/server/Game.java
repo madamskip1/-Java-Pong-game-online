@@ -21,6 +21,8 @@ public class Game {
 	public boolean Accepted[];
 	private int FPS = 60;
 	private int score[] = {0,0};
+	private static final int MAX_SCORE = 10;
+	private int winner;
 
 	public Game(ServerProtocol _prot) {
 		State = States.INIT;
@@ -67,6 +69,7 @@ public class Game {
 
 	public void setupFirstBall() {
 		Balls = new Balls();
+		Balls.setGame(this);
 		Balls.addBall(Ball.generateBall(server.Board.WIDTH, server.Board.HEIGHT));
 		Protocol.writeBallProtocol(("POSITION;" + Balls.size()), Balls.serialize());
 	}
@@ -108,8 +111,31 @@ public class Game {
 	}
 
 	public void gameOver() {
-		int winner = 0;
 		Protocol.writeGameStateProtocol("OVER", Integer.toString(winner));
+		State = Game.States.INITIALIZED;
+		Accepted[0] = Accepted[1] = false;
+		initalized();
+	}
+	
+	public checkEnd()
+	{
+		if (score[0] >= MAX_SCORE)
+		{
+			winner = 0;
+			if (score[1] >= MAX_SCORE)
+				winner = 2;
+			
+			State = Game.States.GAMEOVER;
+		}
+		else if (score[1] >= MAX_SCORE)
+		{
+			winner = 1;
+			if (score[0] >= MAX_SCORE)
+				winner = 2;
+			
+			State = Game.States.GAMEOVER;
+		}
+		
 	}
 
 	private void update(long deltaTime) {
@@ -124,6 +150,7 @@ public class Game {
 		Powerups.trySpawn(deltaTime);
 		Balls.addIfZero();
 		Balls.updateScore(score);
+		checkEnd();
 		// Check collision
 		// Check gameEnd
 	}
@@ -144,7 +171,7 @@ public class Game {
 		long now;
 		long update;
 		long delta;
-
+		
 		while (State == States.RUNNING) {
 
 			// Pêtla do poprawienia
@@ -158,8 +185,9 @@ public class Game {
 				update(update);
 				sendEverything();
 			}
-
 		}
+		
+		gameOver();
 
 	}
 }
