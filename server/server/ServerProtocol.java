@@ -77,6 +77,15 @@ public class ServerProtocol {
 			e.printStackTrace();
 		}
 	}
+	
+	public void writeScoreProtocol(String settings, String msg) {
+		try {
+			write("SCORE;" + settings + ";" + msg);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 
 	private void readPlayerProtocol(int playerID, String settings, String msg) {
 		

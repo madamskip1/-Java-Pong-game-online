@@ -36,6 +36,10 @@ public class ClientProtocol {
 
 			else if(obj.equals("POWERUP"))
 				readPowerupProtocol(settings, mainMsg);
+						
+			else if(obj.equals("SCORE"))
+				readScoreProtocol(settings, mainMsg);
+
 		}
 	}
 
@@ -92,6 +96,18 @@ public class ClientProtocol {
 			game.start();
 
 	}
+	
+	private void readScoreProtocol(String settings, String mainMsg) {
+		if (settings.equals("SET")) {
+			String[] split = mainMsg.split(",");
+			int sc[] = {Integer.parseInt(split[0]),Integer.parseInt(split[1])};
+			Game.Scores[0].setScore(sc[0]);
+			Game.Scores[1].setScore(sc[1]);
+
+		}
+		
+	}
+
 
 	public void writePlayerProtocol(String settings, String mainMsg) {
 		try {

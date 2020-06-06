@@ -52,14 +52,14 @@ public class Game {
 	
 	public void Balls(int numOfBalls, String ballsString)
 	{
-		Vector<Ball> newBalls = Balls.deserialize(ballsString);
+		Vector<Ball> newBalls = client.Balls.deserialize(ballsString);
 		
 		Balls.setBalls(newBalls);
 	}
 	
 	public void Powerups(int numOfPowerups, String powerupsString)
 	{
-		Vector<Powerup> newPowers = Powerups.deserialize(powerupsString);
+		Vector<Powerup> newPowers = client.Powerups.deserialize(powerupsString);
 		
 		Powerups.setPowerups(newPowers);
 	}
@@ -163,7 +163,7 @@ public class Game {
 			// update(delta)   - to wykorzystamy do zmniejszenia efektu wizualnego laga
 			
 			Board.repaint();
-
+			TopPanel.repaint();
 		}
 		
 	}

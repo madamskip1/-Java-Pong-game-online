@@ -23,18 +23,18 @@ public class TopPanel extends JPanel {
 	public TopPanel(Score score1, Score score2, Keyboard keyB) {
 		super();
 		this.p1ScoreX = WIDTH / 4;
-		this.p1ScoreY = HEIGHT / 2 +2;
+		this.p1ScoreY = HEIGHT / 2 + 2;
 		this.p2ScoreX = WIDTH * 3 / 4;
-		this.p2ScoreY = HEIGHT / 2 +2;
+		this.p2ScoreY = HEIGHT / 2 + 2;
 		setBackground(PANEL_COLOR);
 		setPreferredSize(getPreferredSize());
 
 		s1 = score1;
 		s2 = score2;
-		
+
 		s1.setPosition(p1ScoreX, p1ScoreY);
 		s2.setPosition(p2ScoreX, p2ScoreY);
-		
+
 		addKeyListener(keyB);
 		setFocusable(true);
 	}
@@ -47,6 +47,11 @@ public class TopPanel extends JPanel {
 		s1.drawScore(g2d);
 		s2.drawScore(g2d);
 
+	}
+	
+	public void setScores(int p1, int p2) {
+		s1.setScore(p1);
+		s2.setScore(p2);
 	}
 
 	@Override
