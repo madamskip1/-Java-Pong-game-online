@@ -2,6 +2,9 @@ package server;
 import java.io.*;
 import java.net.*;
 
+/**
+ *Klasa sieciowo obs³uguj¹ca klientów
+ */
 public class PongClientHandler implements Runnable {
 	final DataInputStream InputStream;
 	final DataOutputStream OutputStream;

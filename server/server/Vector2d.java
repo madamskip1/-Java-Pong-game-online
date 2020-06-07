@@ -1,5 +1,8 @@
 package server;
 
+/**
+ * Klasa przechowuj¹ca informacje o prêdkoœciach
+ */
 public class Vector2d extends Point 
 {
 	public Vector2d(int _vx, int _vy) {

@@ -1,40 +1,51 @@
 package server;
 
+/**
+ * Klasa opisuj¹ca dwuwymiarowy punkt
+ */
 public class Point {
 	protected int x;
 	protected int y;
 	
+	/**
+	 * Inicjuje punkt (0,0)
+	 */
 	public Point()
 	{
 		this.zero();
 	}
 	
-	public Point(Point p)
-	{
-		this.x = p.x;
-	}
-	
+	/**
+	 * Inicjuje punkt (x,y)
+	 * 
+	 * @param x - pierwsza wspó³rzêdna
+	 * @param y - druga wspó³rzêdna
+	 */
 	public Point(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
-	
-	public Point(java.awt.Point p) {
-		this.x = (int)p.getX();
-		this.y = (int)p.getY();
-	}
-	
+
+	/**
+	 * Ustawia po³o¿enie punktu na (0,0)
+	 */
 	public void zero()
 	{
 		this.x = 0;
 		this.y = 0;
 	}
 	
-	
+	/**
+	 * Zwraca wartoœæ po³o¿enia na osi x
+	 */
 	public int getX() {
 		return x;
 	}
 	
+	
+	/**
+	 * Zwraca wartoœæ po³o¿enia na osi y
+	 */
 	public int getY() {
 		return y;
 	}
@@ -44,12 +55,25 @@ public class Point {
 		this.y += dy;
 	}
 	
+	/**
+	 * Przemieszcza punkt 
+	 * 
+	 * @param dx - przesuniêcie x
+	 * @param dy - przesuniêcie y
+	 */
 	public void add(Point p)
 	{
 		this.x += p.x;
 		this.y += p.y;
 	}
 	
+	/**
+	 * Zwraca odleg³oœæ punktu od po³o¿enia (x,y)
+	 * 
+	 * @param x - pierwsza wspó³rzedna
+	 * @param y - druga wspó³rzêdna
+	 * @return odleg³oœæ
+	 */
 	public double distance(int x, int y)
 	{
 		int dx = this.x - x;
@@ -57,6 +81,12 @@ public class Point {
 		return Math.sqrt(dx * dx + dy * dy);
 	}
 	
+	/**
+	 * Zwraca odleg³oœæ punktu od przekazanego punktu
+	 * 
+	 * @param p - punkt wzglêdem którego obliczana jest odleg³oœæ
+	 * @return odleg³oœæ
+	 */
 	public double distance(Point p)
 	{
 		return distance(p.x, p.y);

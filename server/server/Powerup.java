@@ -1,5 +1,8 @@
 package server;
 
+/**
+ * Klasa opisuj¹ca tymczasowe modyfikatory rozgrywki
+ */
 public class Powerup {
 	public static final int POWERUP_SIZE = 50;
 	protected Powerups.PowerupFor For;

@@ -3,7 +3,9 @@ package client;
 import javax.swing.*;
 import java.awt.BorderLayout;
 
-
+/**
+*Klasa okna gry (klient).
+* */
 public class Window extends JFrame {
 	private static final long serialVersionUID = -3834353369457929081L;
 	public static final int WIDTH = 1000;
@@ -13,24 +15,40 @@ public class Window extends JFrame {
 	private Board board;
 	private TopPanel topPanel;
 	
-	
+	/**
+	 * Tworzy nowe okno
+	 * 
+	 * @param keyB - listener klawiatury
+	 */
 	public Window(Keyboard keyB)
 	{
 		addKeyListener(keyB);
 		setFocusable(true);
 	}
-	
+	/**
+	 * Ustawia planszê
+	 * 
+	 * @param _board - ustawiana plansza
+	 */
 	public void setBoard(Board _board)
 	{
 		board = _board;
 	}
 	
+	/**
+	 * Ustawia górny panel
+	 * 
+	 * @param _panel - ustawiany panel
+	 */
 	public void setTopPanel(TopPanel _panel)
 	{
 		topPanel = _panel;
 	}
 	
-	
+	/**
+	 * Tworzy i uruchamia GUI
+	 * 
+	 */
 	public void createAndShowGUI() {
 		JFrame frame = new JFrame("Pong");
 		frame.setResizable(false);

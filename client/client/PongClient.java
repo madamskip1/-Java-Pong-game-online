@@ -3,6 +3,9 @@ package client;
 import java.io.*;
 import java.net.*;
 
+/**
+ *Klasa ³¹cz¹ca czêœæ rysuj¹c¹ i komunikacyjn¹ dla klienta
+ */
 public class PongClient {
 	final static int ServerPort = 51234;
 	private static Socket Socket;

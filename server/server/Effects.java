@@ -3,6 +3,9 @@ package server;
 import java.util.Iterator;
 import java.util.Vector;
 
+/**
+ * Klasa przechowuj¹ca wszystkie efekty.
+ */
 public class Effects {
 	private Vector<effects.PlayerEffect> PlayerEffects;
 	private Vector<effects.BallEffect> BallEffects;

@@ -1,5 +1,7 @@
 package server;
-
+/**
+ * Klasa przechowuj¹ca informacje o bumperze - odbijaczu.
+ */
 public class Bumper {
 	public static final int DEFAULT_WIDTH = 10;
 	public static final int DEFAULT_HEIGHT = 40;
@@ -8,7 +10,10 @@ public class Bumper {
 	private int width;
 	private int height;
 	private int lastSpeed;
-
+	
+	/**
+	 * Tworzy instancjê klasy Bumper z domyœlnymi parametrami
+	 */
 	public Bumper() {
 		Position = new Point();
 		width = DEFAULT_WIDTH;
@@ -16,12 +21,18 @@ public class Bumper {
 		lastSpeed = 0;
 	}
 	
-
+	/**
+	 * Przemieszcza bumper
+	 * @param dy - przesuniêcie OY
+	 * 	 */
 	public void move(int dy) {
 		Position.add(0, dy);
 		lastSpeed = dy;
 	}
 
+	/**
+	 * Ustawia wysokoœæ
+	 * 	 */
 	public void setHeight(int _height) {
 		if (height == _height) 
 			return;

@@ -3,15 +3,26 @@ package server;
 import java.util.Iterator;
 import java.util.Vector;
 
+/**
+ * Klasa przechowuj¹ca wszystkie pi³ki.
+ */
 public class Balls {
 	private final double DISPERSION = 25;
 
 	private Vector<Ball> _balls;
 
+	/**
+	 * Tworzy klasê z iloœci¹ pi³ek = 0
+	 * */
 	public Balls() {
 		_balls = new Vector<Ball>();
 	}
 
+	/**
+	 * Zapisuje stan instancji klasy tak aby mo¿na by³o je wys³aæ do klientów
+	 * 
+	 * @return wiadomoœæ do wys³ania
+	 * */
 	public String serialize() {
 		String ret = "";
 
@@ -23,6 +34,7 @@ public class Balls {
 		return ret;
 	}
 
+	
 	public Ball getBall(int index) {
 		return _balls.elementAt(index);
 	}
@@ -42,6 +54,10 @@ public class Balls {
 		return _balls.size();
 	}
 
+	
+	/**
+	 * Aktualizuje pozycjê wszystkich pi³ek
+	 */
 	public void update() {
 		if (_balls.size() != 0) {
 			for (int i = 0; i < _balls.size(); i++) {
@@ -50,6 +66,9 @@ public class Balls {
 		}
 	}
 
+	/**
+	 * Aktualizuje wynik w oparciu o pozycjê wszystkich pi³ek
+	 */
 	public void updateScore(int score[]) {// tu moze byc cos
 		for (Iterator<Ball> it = _balls.iterator(); it.hasNext();) {
 			Ball p = it.next();
@@ -59,12 +78,21 @@ public class Balls {
 		}
 	}
 
+	/**
+	 * Sprawdza kolizjê wszystkich pi³ek z bumperami
+	 * @param bumper1 - lewy bumper
+	 * @param bumper2 - prawy bumper
+	 */
 	public void bumperCollisions(Bumper bumper1, Bumper bumper2) {
 		for (int i = 0; i < _balls.size(); i++) {
 			_balls.get(i).bumperCollision(bumper1, bumper2);
 		}
 	}
 
+	/**
+	 * Sprawdza czy w grze s¹ jakieœ pi³ki
+	 * @retrun true je¿eli s¹, inaczej false
+	 */
 	public boolean areThereBalls() {
 		if (_balls.size() == 0)
 			return false;
@@ -72,6 +100,10 @@ public class Balls {
 			return true;
 	}
 
+	/**
+	 * Potraja wybran¹ pi³kê
+	 * @param ballToMultiple - pi³ka do zwielokrotnienia
+	 */
 	public void multiple(Ball ballToMultiple) {
 		Vector2d vel = ballToMultiple.getVelocity();
 		double totalSpeed = Math.sqrt(vel.x * vel.x + vel.y * vel.y);
@@ -94,6 +126,9 @@ public class Balls {
 
 	}
 
+	/**
+	 * Potraja wszystkie pi³ki
+	 */
 	public void multipleAll() {
 		int size = size();
 
@@ -101,6 +136,9 @@ public class Balls {
 			multiple(_balls.get(i));
 	}
 
+	/**
+	 * Generuje pi³kê jeœli nie ma ¿adnej
+	 */
 	public void addIfZero() {
 		if (_balls.size() == 0) {
 			Ball b = Ball.generateBall(Board.WIDTH, Board.HEIGHT);

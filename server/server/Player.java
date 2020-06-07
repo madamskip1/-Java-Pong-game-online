@@ -1,5 +1,8 @@
 package server;
 
+/**
+ * Klasa gracza po stronie serwera
+ */	
 public class Player {
 	public static final int DEFAULT_SPEED = 12;
 	
@@ -59,6 +62,9 @@ public class Player {
 		return bumper;
 	}
 	
+	/**
+	 * Aktualizuje wartoœci gracza
+	 */	
 	public void update()
 	{
 		if (direction == Direction.NONE) {

@@ -1,26 +1,40 @@
 package powerup;
 
+/**
+ * Klasa efektów modyfikacji zachowañ graczy
+ */
 public class PlayerPowerup extends server.Powerup
 {
 	private server.Powerups.PlayerPowerupTypes playerType;
+	
+	/**
+	 * Tworzy nowy powerup z efektami dla graczy
+	 * 
+	 * @param x - pierwsza wspó³rzêdna po³o¿enia
+	 * @param y - druga wspó³rzêdna po³o¿enia
+	 * @param _For - dla kogo efekt
+	 */
 	public PlayerPowerup(int x, int y, server.Powerups.PlayerPowerupTypes _playerType, server.Powerups.PowerupFor _For) {
 		super(x, y);
 		playerType = _playerType;
-		For = _For;
-		
-		
+		For = _For;	
 		int typeNr = 0;
 		typeNr += server.Powerups.BallPowerupTypes.values().length;
 		
 		if (For == server.Powerups.PowerupFor.OPPONENT)
 			typeNr += server.Powerups.PlayerPowerupTypes.values().length;
-		
 		typeNr += _playerType.ordinal();
-		
 		Type = server.Powerups.intToType(typeNr);
 	}
 
-	
+
+	/**
+	 * Uruchamia efekt powerupu w zale¿noœci od osoby przeznaczenia efektu
+	 * 
+	 * @param balls - wszystkie pi³ki
+	 * @param ball - pi³ka która aktywowa³a powerup
+	 * @return aktywowany efekt
+	 */
 	public server.Effect hitBy(server.Balls balls, server.Ball ball)
 	{
 		server.Player player = forPlayer(ball.touchBy());
@@ -58,21 +72,31 @@ public class PlayerPowerup extends server.Powerup
 		return effect;
 	}
 	
+	/**
+	 * Sprawdza dla którego gracza efekt ma byæ aktywowany
+	 * 
+	 * @param index - który gracz aktywowa³ powerup
+	 * @return gracz dla której efekt bêdzie aktywowany
+	 */
 	private server.Player forPlayer(int index)
-	{
-		
-		
+	{		
 		if (For == server.Powerups.PowerupFor.ME)
 			return server.Powerups.getPlayer(index);
 
 		return server.Powerups.getPlayer((index + 1)%2);
-			
 	}
 	
-	private server.Effect setupEffect(server.Effect effect, server.Player player, server.Effect.EffectsType typ)
+	/**
+	 * Aktywuje efekt
+	 * 
+	 * @param player - gracz na którego efekt bêdzie dzia³ac
+	 * @param type - jaki efekt bêdzie aktywowany
+	 * @return aktywowany efekt
+	 */
+	private server.Effect setupEffect(server.Effect effect, server.Player player, server.Effect.EffectsType type)
 	{
 		effect.setPlayer(player);
-		effect.setType(typ);
+		effect.setType(type);
 		effect.For = server.Effect.EffectFor.PLAYER;
 		return effect;
 	}

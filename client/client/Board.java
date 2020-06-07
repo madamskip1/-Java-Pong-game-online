@@ -7,7 +7,10 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-
+/**
+ * Klasa zawieraj¹ca informacje o polu rozgrywki. Na niej rysowane s¹
+ * bumpery, pi³ki i powerupy
+ */
 public class Board extends JPanel {
 	private static final long serialVersionUID = -929250326118627613L;
 	private final Color BACKGROUND_COLOR = Color.LIGHT_GRAY;
@@ -29,6 +32,11 @@ public class Board extends JPanel {
 	private Bumper Bumpers[];
 	private Powerups Powerups;
 
+	/**
+	 * Tworzy nowe pole rozgrywki
+	 * 
+	 * @param keyB listener klawiatury
+	 */
 	public Board(Keyboard keyB) {
 		super();
 		setBackground(BACKGROUND_COLOR);
@@ -40,22 +48,44 @@ public class Board extends JPanel {
 		setFocusable(true);
 	}
 
+	/**
+	 * Ustawia instancjê Balls
+	 * 
+	 * @param _balls ustawiana instancja
+	 */
 	public void setBalls(Balls _balls) {
 		balls = _balls;
 	}
 
+	/**
+	 * Ustawia instancjê Bumper
+	 * 
+	 * @param _bumper ustawiana instancja
+	 * @param n 0 - gracz 1, 1 gracz 2
+	 */
 	public void setBumper(Bumper _bumper, int n) {
 		Bumpers[n] = _bumper;
 	}
 
+	/**
+	 * Ustawia instancjê Powerups
+	 * 
+	 * @param _powers ustawiana instancja
+	 */
 	public void setPowerups(Powerups _powers) {
 		Powerups = _powers;
 	}
 
+	/**
+	 * Rysuje pole gry oraz wszystkie elementy na nim zawarte
+	 * pi³ki, bumpery oraz powerupy
+	 * 
+	 * @param g - renderer 
+	 */
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		Graphics2D g2d = (Graphics2D) g;
+		Graphics2D g2d = (Graphics2D) g; // klasa Graphics jest przestarza³a
 
 		if (!(Game.State == Game.States.RUNNING)) {
 			g2d.setColor(Color.BLACK);
@@ -65,6 +95,9 @@ public class Board extends JPanel {
 
 			g2d.setFont(font);
 			g2d.setColor(TEXT_COLOR);
+			
+			//ró¿ne wygl¹dy planszy w zale¿noœci od stanu
+			//gra nie trwa, czekamy na akcje gracza
 			if (Game.State == Game.States.INIT)
 				g2d.drawString(waitingMsg, Window.WIDTH / 2 - OFFSET, Window.HEIGHT / 2 - TXT_OFFSET_Y);
 			else if (Game.State == Game.States.ACCEPTED)
@@ -80,7 +113,7 @@ public class Board extends JPanel {
 			else if (Game.State == Game.States.BEFORE_INIT)
 				;
 
-		} else {
+		} else {//gra trwa
 			g2d.setColor(LINE_COLOR);
 			g2d.fillRect(Window.WIDTH / 2 - 1, 0, 2, Window.HEIGHT);
 			balls.draw(g2d);
@@ -90,13 +123,19 @@ public class Board extends JPanel {
 		}
 	}
 
+	/**
+	 * Ustawia po¿¹dan¹ wielkoœæ planszy
+	 * 
+	 */
 	@Override
 	public Dimension getPreferredSize() {
 		return (new Dimension(Window.WIDTH, Window.HEIGHT));
 	}
 
+	/**
+	 * Odœwie¿a wygl¹d planszy
+	 */
 	public void nextTurn() {
-
 		this.repaint();
 	}
 }

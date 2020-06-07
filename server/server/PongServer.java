@@ -2,6 +2,9 @@ package server;
 import java.io.IOException;
 import java.net.*;
 
+/**
+ *Klasa ³¹cz¹ca logikê rozgrywki i wysy³anie informacji do klientów
+ */
 public class PongServer {
 	public static final int PORT = 51234;
 	
@@ -17,6 +20,9 @@ public class PongServer {
 		PongServer serv = new PongServer();
 	}
 	
+	/**
+	 *Uruchamia serwer i wysy³a ustawienia pocz¹tkowe do klientów
+	 */
 	public PongServer() throws IOException
 	{
 		System.out.println("Starting server...");
@@ -60,6 +66,9 @@ public class PongServer {
 		Game.initalized();
 	}
 	
+	/**
+	 *Wysy³a wiadomoœæ do klientów
+	 */
 	public void output(String msg) throws IOException
 	{
 		player1.OutputStream.writeUTF(msg);

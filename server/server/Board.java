@@ -1,6 +1,10 @@
 package server;
 
-
+/**
+ * 
+ * Sta³e definiuj¹ce rozmiar planszy
+ *
+ */
 public class Board
 {
 	public static final int WIDTH = 1000;

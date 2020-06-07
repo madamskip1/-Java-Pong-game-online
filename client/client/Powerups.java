@@ -3,6 +3,9 @@ package client;
 import java.awt.Graphics2D;
 import java.util.Vector;
 
+/**
+ * Klasa przechowuj¹ca zbiór powerupów
+ */
 public class Powerups {
 	static private ImageLoader iLoader;
 	private Vector<Powerup> powerups;
@@ -25,16 +28,28 @@ public class Powerups {
 		OPPONENT_BEER
 	}
 	
+	/**
+	 * Inicjacja pustego wektora powerupów
+	 */
 	public Powerups()
 	{
 		powerups = new Vector<Powerup>();
 		iLoader = new ImageLoader();
 	}
 	
+	/**
+	 * Zwraca iloœæ powerupów
+	 */
 	public int size() {
 		return powerups.size();
 	}
 	
+	/**
+	 * Przetwarza odebran¹ wiadomoœæ na wektor powerupów
+	 * 
+	 * @param stringWithBalls odczytana wiadomoœæ o powerupach
+	 * @return nowy wektor powerupów
+	 */
 	public static Vector<Powerup> deserialize(String stringWithPowerups)
 	{
 		Vector<Powerup> toReturn = new Vector<Powerup>();
@@ -54,21 +69,38 @@ public class Powerups {
 		return toReturn;
 	}
 	
+	/**
+	 * Przetwarza wartoœæ na typ powerupu
+	 * 
+	 * @param type
+	 * @return nowy wektor pi³ek
+	 */
 	public static PowerupTypes intToType(int type)
 	{
 		return PowerupTypes.values()[type];
 	}
 	
+	/**
+	 * Ustawia nowy wektor powerupów
+	 * 
+	 * @param balls wektor powerupów
+	 */
 	public void setPowerups(Vector<Powerup> powers)
 	{
 		powerups = powers;
 	}
 	
+	/**
+	 * Zeruje iloœæ powerupów
+	 */
 	public void clearPowerups()
 	{
 		powerups.clear();
 	}
 	
+	/**
+	 * Rysuje wszystkie powerupy
+	 **/
 	public void draw(Graphics2D g)
 	{
 		for (int i=0; i<powerups.size();++i) 

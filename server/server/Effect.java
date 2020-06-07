@@ -1,5 +1,8 @@
 package server;
 
+/**
+ * Zwraca wartoœæ po³o¿enia na osi y
+ */
 public class Effect
 {
 	private static final int TIME_TO_EXPIRE = 5; // sec
@@ -28,6 +31,10 @@ public class Effect
 	}
 	
 	
+	/**
+	 * Aktualizuje pozosta³y czas trwania efektu
+	 * @param time - modyfikator pozosta³ego czasu
+	 */
 	public boolean update(long time)
 	{
 		timeToExpire -= (double) time / 1000000000;

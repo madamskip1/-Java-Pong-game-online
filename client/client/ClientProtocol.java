@@ -5,12 +5,21 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Klasa definiuj¹ca protokó³ klienta
+ */
 public class ClientProtocol {
 	private final Pattern mainPattern;
 	private final Pattern twoPattern;
 	private Game game;
 	private DataOutputStream Output;
-
+	
+	/**
+	 * Tworzy instancjê klasy obs³uguj¹cej nadawanie i odbieranie pakietów
+	 * 
+	 * @param _game gra dla której bêdzie nastêpowaæ wymiana pakietów
+	 * @param _output wychodz¹cy strumieñ danych
+	 */
 	public ClientProtocol(Game _game, DataOutputStream _output) {
 		game = _game;
 		Output = _output;
@@ -18,6 +27,11 @@ public class ClientProtocol {
 		twoPattern = Pattern.compile("(.+?);(.+?)");
 	}
 
+	/**
+	 * Kieruje odebran¹ wiadomoœæ do odpowiedniego przetworzenia
+	 * 
+	 * @param msg odebrana wiadomoœæ
+	 */
 	public void read(String msg) {
 		Matcher match = mainPattern.matcher(msg);
 		if (match.matches()) {
@@ -43,11 +57,23 @@ public class ClientProtocol {
 		}
 	}
 
+	/**
+	 * Wysy³a wiadomoœæ do serwera
+	 * 
+	 * @param msg wysy³ana wiadomoœæ
+	 */
 	private void write(String msg) throws IOException {
 		Output.flush();
 		Output.writeUTF(msg);
 	}
 
+	/**
+	 * Parsuje wiadomoœæ dotycz¹c¹ graczy i
+	 * ustawia odpowiednie pola
+	 * 
+	 * @param settings dodatkowe ustawienia
+	 * @param mainMsg wiadomoœæ
+	 */
 	private void readPlayerProtocol(String settings, String mainMsg) {
 		if (settings.equals("YOU")) {
 			game.setYou(Integer.parseInt(mainMsg));
@@ -69,6 +95,13 @@ public class ClientProtocol {
 		}
 	}
 
+	/**
+	 * Parsuje wiadomoœæ dotycz¹c¹ pi³ek i
+	 * ustawia odpowiednie pola
+	 * 
+	 * @param settings dodatkowe ustawienia
+	 * @param mainMsg wiadomoœæ
+	 */
 	private void readBallProtocol(String settings, String mainMsg) {
 		if (settings.equals("POSITION")) {
 			Matcher match = twoPattern.matcher(mainMsg);
@@ -79,6 +112,13 @@ public class ClientProtocol {
 		}
 	}
 
+	/**
+	 * Parsuje wiadomoœæ dotycz¹c¹ powerupów i
+	 * ustawia odpowiednie pola
+	 * 
+	 * @param settings dodatkowe ustawienia
+	 * @param mainMsg wiadomoœæ
+	 */
 	private void readPowerupProtocol(String settings, String mainMsg) {
 		if (settings.equals("POSITION")) {
 			Matcher match = twoPattern.matcher(mainMsg);
@@ -89,6 +129,13 @@ public class ClientProtocol {
 		}
 	}
 
+	/**
+	 * Parsuje wiadomoœæ dotycz¹c¹ powerupów i
+	 * ustawia odpowiednie pola
+	 * 
+	 * @param settings dodatkowe ustawienia
+	 * @param mainMsg wiadomoœæ
+	 */
 	private void readStateProtocol(String settings, String mainMsg) {
 		if (settings.equals("INIT")) {
 		} else if (settings.equals("START"))
@@ -97,6 +144,13 @@ public class ClientProtocol {
 			game.over(Integer.parseInt(mainMsg));
 	}
 
+	/**
+	 * Parsuje wiadomoœæ dotycz¹c¹ wyniku i
+	 * ustawia odpowiednie pola
+	 * 
+	 * @param settings dodatkowe ustawienia
+	 * @param mainMsg wiadomoœæ
+	 */
 	private void readScoreProtocol(String settings, String mainMsg) {
 		if (settings.equals("SET")) {
 			String[] split = mainMsg.split(",");
@@ -106,6 +160,12 @@ public class ClientProtocol {
 		}
 	}
 
+	/**
+	 * Tworzy i wysy³a wiadomoœæ dotycz¹c¹ gracza
+	 * 
+	 * @param settings dodatkowe ustawienia
+	 * @param mainMsg wiadomoœæ
+	 */
 	public void writePlayerProtocol(String settings, String mainMsg) {
 		try {
 			write("PLAYER;" + settings + ";" + mainMsg);
@@ -114,6 +174,10 @@ public class ClientProtocol {
 		}
 	}
 
+	/**
+	 * Tworzy i wysy³a wiadomoœæ o przyjêciu wyzwania
+	 * 
+	 */
 	public void writeAcceptProtocol() {
 		try {
 			write("ACCEPT;1;1");
@@ -122,6 +186,11 @@ public class ClientProtocol {
 		}
 	}
 
+	/**
+	 * Odczytuje z wiadomoœci id gracza
+	 * 
+	 * @return id gracza
+	 */
 	private int getPlayerId(String msg) {
 		return Integer.parseInt((msg.split("_"))[1]);
 	}

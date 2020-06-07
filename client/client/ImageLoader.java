@@ -7,32 +7,47 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import client.Powerups.PowerupTypes;
 
-public class ImageLoader {	
-	private final String fileNames [];
-	private BufferedImage pics [];
+/**
+ * Klasa wykonuj¹ca wczytywanie obrazów opisuj¹cych powerupy
+ */
+public class ImageLoader {
+	private final String fileNames[];
+	private BufferedImage pics[];
 
-	
-	ImageLoader(){
+	/**
+	 * Tworzy instancjê i wczytuje obrazy
+	 */
+	ImageLoader() {
 		fileNames = makePathList();
 		pics = new BufferedImage[fileNames.length];
 		for (int i = 0; i < fileNames.length; i++) {
 			try {
-				pics[i]= ImageIO.read(new File(fileNames[i]));
-				}
-				catch(Exception ex) {
-					ex.printStackTrace();
-				}
+				pics[i] = ImageIO.read(new File(fileNames[i]));
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
 		}
 	}
-	
+
+	/**
+	 * Funkcja zwracaj¹ca obraz dla konkretnego typu powerupu
+	 * 
+	 * @param pt - typ powerupu
+	 * @return BufferedImage obrazu
+	 */
 	public BufferedImage getImage(PowerupTypes pt) {
-		 BufferedImage bi = pics[pt.ordinal()];
-		 ColorModel cm = bi.getColorModel();
-		 boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
-		 WritableRaster raster = bi.copyData(null);
-		 return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
-		}
-	
+		BufferedImage bi = pics[pt.ordinal()];
+		ColorModel cm = bi.getColorModel();
+		boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
+		WritableRaster raster = bi.copyData(null);
+		return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
+	}
+
+	/**
+	 * Funkcja inicjuj¹ca listê œcie¿ek do obrazów
+	 * 
+	 * @return lista œcie¿ek
+	 */
 	private String[] makePathList() {
 		String[] list = new String[PowerupTypes.values().length];
 		list[PowerupTypes.ME_FAST.ordinal()] = "images/fastME.png";
@@ -47,9 +62,9 @@ public class ImageLoader {
 		list[PowerupTypes.OPPONENT_SMALL.ordinal()] = "images/smallNME.png";
 		list[PowerupTypes.BALL_MULTIPLE_SINGLE.ordinal()] = "images/splitBall.png";
 		list[PowerupTypes.BALL_MULTIPLE_ALL.ordinal()] = "images/multipleAll.png";
-		list[PowerupTypes.BALL_SLOW.ordinal()] = "images/slowBall.png";		
+		list[PowerupTypes.BALL_SLOW.ordinal()] = "images/slowBall.png";
 		list[PowerupTypes.BALL_FAST.ordinal()] = "images/speedBall.png";
 		return list;
 	}
-	
+
 }
