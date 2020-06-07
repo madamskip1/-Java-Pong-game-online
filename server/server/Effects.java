@@ -15,8 +15,6 @@ public class Effects {
 	
 	public void update(long deltaTime)
 	{
-		int size;
-		size = PlayerEffects.size();
 		for (Iterator<effects.PlayerEffect> pe = PlayerEffects.iterator(); pe.hasNext();)
 		{
 			effects.PlayerEffect e = pe.next();
@@ -30,12 +28,6 @@ public class Effects {
 			if (e.update(deltaTime))
 				be.remove();
 		}
-//		size = BallEffects.size();
-//		for (int i = 0; i < size; i++)
-//		{
-//			if (BallEffects.get(i).update(deltaTime))
-//				BallEffects.remove(BallEffects.get(i));
-//		}
 	}
 	
 	
@@ -52,45 +44,38 @@ public class Effects {
 			break;
 		default:
 			break;
-		
 		}
 	}
 	
 	
 	private void addPlayer(effects.PlayerEffect effectToAdd)
-	{
-		int size = PlayerEffects.size();
-		effects.PlayerEffect effect;
-		for (int i = 0; i < size; i++)
+	{		
+		for (Iterator<effects.PlayerEffect> it = PlayerEffects.iterator(); it.hasNext();)
 		{
-			effect = PlayerEffects.get(i);
-			if(effect.isForSameObject(effectToAdd))
+			effects.PlayerEffect effect = it.next();
+			if (effect.isForSameObject(effectToAdd))
 			{
 				effect.end();
-				BallEffects.remove(i);
+				it.remove();
 				break;
 			}
-		}
-		
+		}	
 		effectToAdd.startEffect();
 		PlayerEffects.add(effectToAdd);
 	}
 	
 	private void addBall(effects.BallEffect effectToAdd)
 	{
-		int size = BallEffects.size();
-		effects.BallEffect effect;
-		for (int i = 0; i < size; i++)
+		for (Iterator<effects.BallEffect> it = BallEffects.iterator(); it.hasNext();)
 		{
-			effect = BallEffects.get(i);
-			if(effect.isForSameObject(effectToAdd))
+			effects.BallEffect effect = it.next();
+			if (effect.isForSameObject(effectToAdd))
 			{
 				effect.end();
-				BallEffects.remove(i);
+				it.remove();
 				break;
 			}
-		}
-		
+		}	
 		effectToAdd.startEffect();
 		BallEffects.add(effectToAdd);
 	}

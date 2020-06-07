@@ -36,18 +36,19 @@ public class Effect
 			expire();
 			return true;
 		}
-		
-		// Zwraca fa³sz, jeœli siê nie skoñczy³
 		return false;
 	}
+	
 	public void end()
 	{
 		expire();
 	} 
+	
 	public void setType(Effect.EffectsType _type)
 	{
 		type = _type;
-	} 
+	}
+	
 	public void startEffect() {}// metoda wirtualna
 	protected void expire() {} // metoda wirtualna
 	public void setPlayer(Player player) {} // metoda wirtualna

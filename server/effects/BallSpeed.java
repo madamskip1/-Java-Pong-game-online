@@ -14,6 +14,8 @@ public class BallSpeed  extends BallEffect
 		case SLOW:
 			makeSlow();
 			break;
+		default:
+			throw new RuntimeException("invalid effect type");
 		}
 	}
 	

@@ -9,7 +9,7 @@ public class Balls {
 	public Balls() {
 		_balls = new Vector<Ball>();
 	}
-	
+
 	public int size() {
 		return _balls.size();
 	}
@@ -18,12 +18,10 @@ public class Balls {
 		Vector<Ball> toReturn = new Vector<Ball>();
 		String[] splitted = stringWithBalls.split(";");
 		String[] singleBall;
-		int numberOfBalls = splitted.length;
 
 		for (String ball : splitted) {
 			singleBall = ball.split(",");
-			toReturn.add(new Ball(Integer.parseInt(singleBall[0]),
-					Integer.parseInt(singleBall[1]),
+			toReturn.add(new Ball(Integer.parseInt(singleBall[0]), Integer.parseInt(singleBall[1]),
 					Integer.parseInt(singleBall[2])));
 		}
 
@@ -35,10 +33,9 @@ public class Balls {
 	}
 
 	public void draw(Graphics2D g) {
-		for (int i=0; i<_balls.size();++i)
+		for (int i = 0; i < _balls.size(); ++i)
 			_balls.get(i).drawBall(g);
 	}
-	
 
 	public void clearBalls() {
 		_balls.clear();

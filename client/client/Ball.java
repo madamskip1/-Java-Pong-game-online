@@ -7,8 +7,8 @@ public class Ball {
 	public static final Color BALL_COLOR = Color.WHITE;
 	public static final Color EDGE_COLOR = Color.black;
 	
-	private int radius;
 	private Point position;
+	private int radius;
 	
 	
 	public Ball() {

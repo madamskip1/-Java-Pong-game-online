@@ -25,7 +25,7 @@ public class PongClientHandler implements Runnable {
 		while(true)
 		{
 			received = "";
-			try
+			try 
 			{
 				received = InputStream.readUTF();
 			}

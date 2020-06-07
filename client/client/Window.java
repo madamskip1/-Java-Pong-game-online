@@ -1,12 +1,11 @@
 package client;
 
 import javax.swing.*;
-
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 public class Window extends JFrame {
+	private static final long serialVersionUID = -3834353369457929081L;
 	public static final int WIDTH = 1000;
 	public static final int HEIGHT = 440;
 	public static final int PANEL_HEIGHT = 60;
@@ -40,8 +39,8 @@ public class Window extends JFrame {
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		frame.add(topPanel, BorderLayout.NORTH);
 		frame.add(board, BorderLayout.CENTER);
+		frame.add(topPanel, BorderLayout.NORTH);
 
 		frame.pack();
 	}

@@ -5,11 +5,11 @@ import java.awt.event.KeyEvent;
 
 public class Keyboard implements KeyListener {
 	private Game game;
-	
-	public Keyboard(Game _game)
-	{
+
+	public Keyboard(Game _game) {
 		game = _game;
 	}
+
 	@Override
 	public void keyPressed(KeyEvent ev) {
 		game.keyPressed(ev.getKeyCode());
@@ -22,9 +22,6 @@ public class Keyboard implements KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent ev) {
-		// TODO Auto-generated method stub
-		
 	}
-	
-	
+
 }

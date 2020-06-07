@@ -2,7 +2,6 @@ package client;
 
 import java.io.*;
 import java.net.*;
-import java.util.Scanner;
 
 public class PongClient {
 	final static int ServerPort = 51234;
@@ -14,7 +13,6 @@ public class PongClient {
 	
 	public static void main(String[] args) throws UnknownHostException, IOException {
 		Socket = new Socket("127.0.0.1", ServerPort);
-		Scanner scanner = new Scanner(System.in);		
 		InputStream = new DataInputStream(Socket.getInputStream());
 		OutputStream = new DataOutputStream(Socket.getOutputStream());
 		

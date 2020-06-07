@@ -58,8 +58,6 @@ public class PongServer {
 		protocol.setGame(Game);
 		
 		Game.initalized();
-		
-		// Zrobiæ koñczenie po³¹czenia
 	}
 	
 	public void output(String msg) throws IOException

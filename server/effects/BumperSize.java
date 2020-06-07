@@ -15,6 +15,8 @@ public class BumperSize extends PlayerEffect
 		case SMALL:
 			makeSmall();
 			break;
+		default:
+			throw new RuntimeException("invalid effect type");
 		}
 		
 		writeSize();

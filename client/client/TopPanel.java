@@ -8,9 +8,10 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 public class TopPanel extends JPanel {
-	public static final Color PANEL_COLOR = Color.black;
-	public static final int HEIGHT = 60;
-	public static final int WIDTH = 1000;
+	private static final long serialVersionUID = 1L;
+	private final Color PANEL_COLOR = Color.black;
+	private final int SCORE_OFFSET= 40;
+	
 
 	private int p1ScoreX;
 	private int p1ScoreY;
@@ -22,10 +23,10 @@ public class TopPanel extends JPanel {
 
 	public TopPanel(Score score1, Score score2, Keyboard keyB) {
 		super();
-		this.p1ScoreX = WIDTH / 4 - 40 ;
-		this.p1ScoreY = HEIGHT / 2 + 2;
-		this.p2ScoreX = WIDTH * 3 / 4 - 40;
-		this.p2ScoreY = HEIGHT / 2 + 2;
+		this.p1ScoreX = Window.WIDTH / 4 - SCORE_OFFSET ;
+		this.p1ScoreY = Window.PANEL_HEIGHT / 2 + 2;
+		this.p2ScoreX = Window.WIDTH * 3 / 4 - SCORE_OFFSET; 
+		this.p2ScoreY = Window.PANEL_HEIGHT / 2 + 2;
 		setBackground(PANEL_COLOR);
 		setPreferredSize(getPreferredSize());
 
@@ -50,7 +51,7 @@ public class TopPanel extends JPanel {
 		s2.drawScore(g2d);
 		}
 	}
-	
+
 	public void setScores(int p1, int p2) {
 		s1.setScore(p1);
 		s2.setScore(p2);
@@ -58,6 +59,6 @@ public class TopPanel extends JPanel {
 
 	@Override
 	public Dimension getPreferredSize() {
-		return (new Dimension(WIDTH, HEIGHT));
+		return (new Dimension(Window.WIDTH, Window.PANEL_HEIGHT));
 	}
 }

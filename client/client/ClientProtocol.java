@@ -103,9 +103,7 @@ public class ClientProtocol {
 			int sc[] = { Integer.parseInt(split[0]), Integer.parseInt(split[1]) };
 			Game.Scores[0].setScore(sc[0]);
 			Game.Scores[1].setScore(sc[1]);
-
 		}
-
 	}
 
 	public void writePlayerProtocol(String settings, String mainMsg) {

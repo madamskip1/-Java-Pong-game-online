@@ -1,7 +1,5 @@
 package powerup;
 
-import effects.BumperSize;
-
 public class PlayerPowerup extends server.Powerup
 {
 	private server.Powerups.PlayerPowerupTypes playerType;
@@ -77,11 +75,5 @@ public class PlayerPowerup extends server.Powerup
 		effect.setType(typ);
 		effect.For = server.Effect.EffectFor.PLAYER;
 		return effect;
-	}
-	
-	
-	private void setType()
-	{
-		
 	}
 }

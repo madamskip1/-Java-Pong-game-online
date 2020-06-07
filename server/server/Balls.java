@@ -4,9 +4,10 @@ import java.util.Iterator;
 import java.util.Vector;
 
 public class Balls {
-	public final double DISPERSION = 25;
+	private final double DISPERSION = 25;
+
 	private Vector<Ball> _balls;
-	private Game game;
+
 	public Balls() {
 		_balls = new Vector<Ball>();
 	}
@@ -21,8 +22,6 @@ public class Balls {
 
 		return ret;
 	}
-	
-	public void setGame(Game _game) { game = _game; }
 
 	public Ball getBall(int index) {
 		return _balls.elementAt(index);
@@ -73,27 +72,27 @@ public class Balls {
 			return true;
 	}
 
-	public void multiple(Ball ballToMultiple)
-    {
-        Vector2d vel = ballToMultiple.getVelocity();
-        double totalSpeed = Math.sqrt(vel.x * vel.x + vel.y * vel.y);
-        double angle = Math.atan2(vel.y, vel.x);
-        double angle1 = Math.toRadians(DISPERSION);
-       
-        Ball newBall1 = ballToMultiple.clone();
-        Ball newBall2 = ballToMultiple.clone();
-        newBall1.setVelocity((int) (totalSpeed * Math.cos(angle + angle1)),
-                (int) (totalSpeed * Math.sin(angle + angle1)));
-        newBall2.setVelocity((int) (totalSpeed * Math.cos(angle - angle1)),
-                (int) (totalSpeed * Math.sin(angle - angle1)));
- 
-        newBall1.correctSpeed();
-        newBall2.correctSpeed();
-        	
-        _balls.add(newBall1);
-        _balls.add(newBall2);
- 
-    }
+	public void multiple(Ball ballToMultiple) {
+		Vector2d vel = ballToMultiple.getVelocity();
+		double totalSpeed = Math.sqrt(vel.x * vel.x + vel.y * vel.y);
+		double angle = Math.atan2(vel.y, vel.x);
+		double angle1 = Math.toRadians(DISPERSION);
+
+		Ball newBall1 = ballToMultiple.clone();
+		Ball newBall2 = ballToMultiple.clone();
+
+		newBall1.setVelocity((int) (totalSpeed * Math.cos(angle + angle1)),
+				(int) (totalSpeed * Math.sin(angle + angle1)));
+		newBall2.setVelocity((int) (totalSpeed * Math.cos(angle - angle1)),
+				(int) (totalSpeed * Math.sin(angle - angle1)));
+
+		newBall1.correctSpeed();
+		newBall2.correctSpeed();
+
+		_balls.add(newBall1);
+		_balls.add(newBall2);
+
+	}
 
 	public void multipleAll() {
 		int size = size();
@@ -101,13 +100,13 @@ public class Balls {
 		for (int i = 0; i < size; i++)
 			multiple(_balls.get(i));
 	}
-	
+
 	public void addIfZero() {
-		if(_balls.size() == 0) {
+		if (_balls.size() == 0) {
 			Ball b = Ball.generateBall(Board.WIDTH, Board.HEIGHT);
 			_balls.add(b);
 		}
-			
+
 	}
-	
+
 }

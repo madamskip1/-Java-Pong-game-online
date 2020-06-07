@@ -23,7 +23,6 @@ public class Powerups {
 		OPPONENT_SLOW,
 		OPPONENT_FAST,
 		OPPONENT_BEER
-
 	}
 	
 	public Powerups()
@@ -43,7 +42,6 @@ public class Powerups {
 		String[] splitted = stringWithPowerups.split(";");
 		String[] singlePowerup;
 		
-		int numberOfPU = splitted.length;
 		PowerupTypes type;
 		for (String Pu : splitted)
 		{

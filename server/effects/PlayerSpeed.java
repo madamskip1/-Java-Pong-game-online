@@ -14,6 +14,8 @@ public class PlayerSpeed  extends PlayerEffect
 		case SLOW:
 			makeSlow();
 			break;
+		default:
+			throw new RuntimeException("invalid effect type");
 		}
 	}
 	

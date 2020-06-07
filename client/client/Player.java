@@ -1,7 +1,5 @@
 package client;
 
-import java.awt.Graphics2D;
-
 public class Player {
 	public enum Direction
 	{
@@ -12,19 +10,11 @@ public class Player {
 		public int size() { return 3; }
 	}
 	
-	private Direction direction;
 	private Bumper bumper;
 	
 	public Player()  {
-		stop();
 		bumper = new Bumper();
 	}
-	
-	public void goUp() { direction = Direction.UP; }
-	
-	public void goDown() { direction = Direction.DOWN; }
-	
-	public void stop() { direction = Direction.NONE; }
 	
 	public void setPosition(int x, int y) { bumper.setPosition(x, y); }
 	
@@ -34,8 +24,7 @@ public class Player {
 		bumper.setHeight(height);
 	}
 	
-	public Bumper getBumper()
-	{
+	public Bumper getBumper() {
 		return bumper;
 	}
 }

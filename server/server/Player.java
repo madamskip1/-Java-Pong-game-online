@@ -90,9 +90,6 @@ public class Player {
 		else if ((y + bumper.getHeight() + dy) >= Board.HEIGHT)
 			dy = Board.HEIGHT - y - bumper.getHeight();
 		
-		
-
-		
 		bumper.move(dy);
 	}
 }

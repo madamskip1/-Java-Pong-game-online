@@ -1,15 +1,10 @@
 package client;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.WritableRaster;
 import java.io.File;
-import java.nio.Buffer;
-
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-
 import client.Powerups.PowerupTypes;
 
 public class ImageLoader {	

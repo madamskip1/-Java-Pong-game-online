@@ -3,6 +3,8 @@ package client;
 import java.util.Vector;
 
 public class Game {
+	private final int REFRESH_TIME = 10;
+
 	ClientProtocol Protocol;
 	private Player Players[];
 	private int you;
@@ -14,7 +16,6 @@ public class Game {
 	private Balls Balls;
 	private Powerups Powerups;
 	protected static Score Scores[];
-	private int FPS = 60;
 
 	public enum States {
 		BEFORE_INIT, INIT, ACCEPTED, INITIALIZED, RUNNING, GAMEOVER, LOSS, WIN, DRAW
@@ -42,13 +43,11 @@ public class Game {
 
 	public void Balls(int numOfBalls, String ballsString) {
 		Vector<Ball> newBalls = client.Balls.deserialize(ballsString);
-
 		Balls.setBalls(newBalls);
 	}
 
 	public void Powerups(int numOfPowerups, String powerupsString) {
 		Vector<Powerup> newPowers = client.Powerups.deserialize(powerupsString);
-
 		Powerups.setPowerups(newPowers);
 	}
 
@@ -61,7 +60,6 @@ public class Game {
 	}
 
 	public void init() {
-
 		State = States.INIT;
 
 		Keyboard = new Keyboard(this);
@@ -84,7 +82,6 @@ public class Game {
 		Board.setPowerups(Powerups);
 		Window.setBoard(Board);
 		Window.setTopPanel(TopPanel);
-
 		Window.createAndShowGUI();
 		Board.repaint();
 	}
@@ -113,34 +110,21 @@ public class Game {
 			State = Game.States.LOSS;
 		else
 			State = Game.States.DRAW;
-
-		// Zatrzymanie pêtli
-		// Wyœwietlenie przegrana/wygrana zale¿nie, który klient
-
 		Board.repaint();
 	}
 
 	private void gameLoop() {
-		long timeBetweenUpdates = 1000000000 / FPS;
-		long lastTime = System.nanoTime();
-		long now;
-		long update;
-		long delta;
-
 		while (State == States.RUNNING) {
-			// Pêtla do poprawienia
-			now = System.nanoTime();
-			update = now - lastTime;
-			lastTime = now;
-			delta = (long) (update / ((double) timeBetweenUpdates));
-
-			// update(delta) - to wykorzystamy do zmniejszenia efektu wizualnego laga
-
+			try {
+				Thread.sleep(REFRESH_TIME);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			Board.repaint();
 			TopPanel.repaint();
-
 		}
-
+		Board.repaint();
+		TopPanel.repaint();
 	}
 
 	public void keyPressed(int code) {
