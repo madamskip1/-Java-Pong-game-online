@@ -39,6 +39,7 @@ public class Powerups {
 	
 	/**
 	 * Zwraca iloœæ powerupów
+	 * @return iloœæ powerupów
 	 */
 	public int size() {
 		return powerups.size();
@@ -47,7 +48,7 @@ public class Powerups {
 	/**
 	 * Przetwarza odebran¹ wiadomoœæ na wektor powerupów
 	 * 
-	 * @param stringWithBalls odczytana wiadomoœæ o powerupach
+	 * @param stringWithPowerups - odczytana wiadomoœæ o powerupach
 	 * @return nowy wektor powerupów
 	 */
 	public static Vector<Powerup> deserialize(String stringWithPowerups)
@@ -72,7 +73,7 @@ public class Powerups {
 	/**
 	 * Przetwarza wartoœæ na typ powerupu
 	 * 
-	 * @param type
+	 * @param type - który z kolei efekt
 	 * @return nowy wektor pi³ek
 	 */
 	public static PowerupTypes intToType(int type)
@@ -83,7 +84,7 @@ public class Powerups {
 	/**
 	 * Ustawia nowy wektor powerupów
 	 * 
-	 * @param balls wektor powerupów
+	 * @param powers - wektor powerupów
 	 */
 	public void setPowerups(Vector<Powerup> powers)
 	{
@@ -100,6 +101,7 @@ public class Powerups {
 	
 	/**
 	 * Rysuje wszystkie powerupy
+	 * @param g - renderer
 	 **/
 	public void draw(Graphics2D g)
 	{

@@ -37,6 +37,7 @@ public class Point {
 	
 	/**
 	 * Zwraca wartoœæ po³o¿enia na osi x
+	 * @return pozycja x
 	 */
 	public int getX() {
 		return x;
@@ -45,6 +46,7 @@ public class Point {
 	
 	/**
 	 * Zwraca wartoœæ po³o¿enia na osi y
+	 * @return pozycja y
 	 */
 	public int getY() {
 		return y;
@@ -54,19 +56,7 @@ public class Point {
 		this.x += dx;
 		this.y += dy;
 	}
-	
-	/**
-	 * Przemieszcza punkt 
-	 * 
-	 * @param dx - przesuniêcie x
-	 * @param dy - przesuniêcie y
-	 */
-	public void add(Point p)
-	{
-		this.x += p.x;
-		this.y += p.y;
-	}
-	
+		
 	/**
 	 * Zwraca odleg³oœæ punktu od po³o¿enia (x,y)
 	 * 

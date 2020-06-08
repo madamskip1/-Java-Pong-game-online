@@ -12,6 +12,7 @@ public class PlayerPowerup extends server.Powerup
 	 * 
 	 * @param x - pierwsza wspó³rzêdna po³o¿enia
 	 * @param y - druga wspó³rzêdna po³o¿enia
+	 * @param _playerType - typ efektu
 	 * @param _For - dla kogo efekt
 	 */
 	public PlayerPowerup(int x, int y, server.Powerups.PlayerPowerupTypes _playerType, server.Powerups.PowerupFor _For) {

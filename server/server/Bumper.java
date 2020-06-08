@@ -32,6 +32,7 @@ public class Bumper {
 
 	/**
 	 * Ustawia wysokoœæ
+	 * @param _height - ustawiana wysokoœæ
 	 * 	 */
 	public void setHeight(int _height) {
 		if (height == _height) 

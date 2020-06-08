@@ -34,6 +34,7 @@ public class Effect
 	/**
 	 * Aktualizuje pozosta³y czas trwania efektu
 	 * @param time - modyfikator pozosta³ego czasu
+	 * @return true jeœli efekt wygas³, false w przeciwnym przypadku
 	 */
 	public boolean update(long time)
 	{

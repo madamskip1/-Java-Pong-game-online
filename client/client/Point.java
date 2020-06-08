@@ -35,6 +35,7 @@ public class Point {
 
 	/**
 	 * Zwraca wartoœæ po³o¿enia na osi x
+	 * @return po³o¿enie x
 	 */
 	public int getX() {
 		return x;
@@ -42,6 +43,7 @@ public class Point {
 
 	/**
 	 * Zwraca wartoœæ po³o¿enia na osi y
+	 * @return po³o¿enie y
 	 */
 	public int getY() {
 		return y;

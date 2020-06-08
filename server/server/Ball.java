@@ -38,7 +38,8 @@ public class Ball {
 	
 	/**
 	 * Generuje now¹ pi³kê
-	 * 
+	 * @param boardWidth - szerokoœæ planszy
+	 * @param boardHeight - wysokoœæ planszy
 	 * @return nowa pi³ka
 	 */
 	public static Ball generateBall(int boardWidth, int boardHeight) {
@@ -147,6 +148,7 @@ public class Ball {
 
 	/**
 	 * Zwraca gracza przez którego pi³ka jest dotkniêta
+	 * @return 0 - gracz lewy, 1 - prawy, -1 - ¿aden
 	 */
 	public int touchBy() {
 		return touchByPlayer;
@@ -163,6 +165,7 @@ public class Ball {
 
 	/**
 	 * Zwraca pole prêdkoœci pi³ki
+	 * @return prêdkoœæ
 	 * */
 	public Vector2d getVelocity() {
 		return velocity;

@@ -43,6 +43,7 @@ public class Game {
 
 	/**
 	 * Ustawia protokó³ komunikacji klienta
+	 * @param _prot - ustawiany protokó³
 	 */
 	public void setProtocol(ClientProtocol _prot) {
 		Protocol = _prot;
@@ -50,6 +51,7 @@ public class Game {
 
 	/**
 	 * Ustawia którym graczem (lewym czy prawym) jest
+	 * @param num - 0 - lewy, 1 - prawy
 	 */
 	public void setYou(int num) {
 		you = num;
@@ -60,8 +62,8 @@ public class Game {
 	 * Funkcja przetwarzaj¹ca odebran¹ wiadomoœæ zawieraj¹ca informacje dotycz¹ce
 	 * pi³ek i ustawiaj¹ca je w kliencie
 	 * 
-	 * @param numOfBalls  liczba pi³ek w grze
-	 * @param ballsString odebrana wiadomoœæ opisuj¹ca pi³ki
+	 * @param numOfBalls - liczba pi³ek w grze
+	 * @param ballsString - odebrana wiadomoœæ opisuj¹ca pi³ki
 	 */
 	public void Balls(int numOfBalls, String ballsString) {
 		Vector<Ball> newBalls = client.Balls.deserialize(ballsString);
@@ -72,8 +74,8 @@ public class Game {
 	 * Funkcja przetwarzaj¹ca odebran¹ wiadomoœæ zawieraj¹ca informacje dotycz¹ce
 	 * pi³ek i ustawiaj¹ca je w kliencie
 	 * 
-	 * @param numOfBalls  liczba pi³ek w grze
-	 * @param ballsString odebrana wiadomoœæ opisuj¹ca pi³ki
+	 * @param numOfPowerups - liczba powerupów w grze
+	 * @param powerupsString - odebrana wiadomoœæ opisuj¹ca powerupy
 	 */
 	public void Powerups(int numOfPowerups, String powerupsString) {
 		Vector<Powerup> newPowers = client.Powerups.deserialize(powerupsString);

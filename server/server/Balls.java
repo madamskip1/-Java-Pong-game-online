@@ -68,6 +68,7 @@ public class Balls {
 
 	/**
 	 * Aktualizuje wynik w oparciu o pozycjê wszystkich pi³ek
+	 * @param score - tablica wyników
 	 */
 	public void updateScore(int score[]) {// tu moze byc cos
 		for (Iterator<Ball> it = _balls.iterator(); it.hasNext();) {
@@ -91,7 +92,7 @@ public class Balls {
 
 	/**
 	 * Sprawdza czy w grze s¹ jakieœ pi³ki
-	 * @retrun true je¿eli s¹, inaczej false
+	 * @return true je¿eli s¹, inaczej false
 	 */
 	public boolean areThereBalls() {
 		if (_balls.size() == 0)

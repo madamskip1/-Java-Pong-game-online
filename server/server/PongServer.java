@@ -22,6 +22,7 @@ public class PongServer {
 	
 	/**
 	 *Uruchamia serwer i wysy³a ustawienia pocz¹tkowe do klientów
+	 *@throws IOException jesli sie nie uda
 	 */
 	public PongServer() throws IOException
 	{
@@ -68,6 +69,8 @@ public class PongServer {
 	
 	/**
 	 *Wysy³a wiadomoœæ do klientów
+	 *@param msg - wiadomoœæ do wys³ania
+	 *@throws IOException jesli sie nie uda
 	 */
 	public void output(String msg) throws IOException
 	{
