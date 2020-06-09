@@ -10,7 +10,7 @@ public class Effects {
 	private Vector<effects.PlayerEffect> PlayerEffects;
 	private Vector<effects.BallEffect> BallEffects;
 	
-	Effects(){
+	public Effects(){
 		PlayerEffects = new Vector<effects.PlayerEffect>();
 		BallEffects = new Vector<effects.BallEffect>();
 	}

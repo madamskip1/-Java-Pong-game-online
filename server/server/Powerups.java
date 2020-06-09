@@ -178,7 +178,7 @@ public class Powerups {
 	 * @return true/ false losowo
 	 */
 	private boolean randIfSpawn() {
-		if (Utility.randomInt(0, 1000) <= chanceToSpawn)
+		if (Utility.randomInt(0, 100) <= chanceToSpawn)
 			return true;
 
 		return false;

@@ -262,14 +262,14 @@ public class Ball {
 	private void spin(Bumper b) {
 		if (b.getLastSpeed() < 0) {// board goes up
 			if (velocity.y < 0)
-				velocity.accelerate(1, (int) (-1 * FRICTION * b.getLastSpeed()));
+				velocity.accelerate(0, (int) (-1 * FRICTION * b.getLastSpeed()));
 			else
-				velocity.accelerate(1, (int) (FRICTION * b.getLastSpeed()));
+				velocity.accelerate(0, (int) (FRICTION * b.getLastSpeed()));
 		} else {// board goes down
 			if (velocity.y < 0)
-				velocity.accelerate(1, (int) (-1 * FRICTION * b.getLastSpeed()));
+				velocity.accelerate(0, (int) (-1 * FRICTION * b.getLastSpeed()));
 			else
-				velocity.accelerate(1, (int) (FRICTION * b.getLastSpeed()));
+				velocity.accelerate(0, (int) (FRICTION * b.getLastSpeed()));
 		}
 		if (velocity.x < 0)
 			velocity.accelerate(-1, 0);
